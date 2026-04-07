@@ -1,0 +1,22 @@
+{
+  "name": "doi-method",
+  "version": "1.0.0",
+  "description": "Digital Operations Intelligence — AI/automation readiness assessment methodology for Claude Code",
+  "author": "3rd Brain DigiOps",
+  "license": "proprietary",
+  "skills": [
+    "skills/doi-run",
+    "skills/doi-intake",
+    "skills/doi-assess",
+    "skills/doi-setup",
+    "skills/doi-verify",
+    "skills/doi-roles",
+    "skills/doi-friction",
+    "skills/doi-route",
+    "skills/doi-pillars",
+    "skills/doi-roadmap"
+  ],
+  "agents": [
+    "agents/doi-review"
+  ]
+}
