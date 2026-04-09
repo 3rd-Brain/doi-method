@@ -11,18 +11,19 @@ metadata:
 ---
 
 ### Overview
-Phase 6 of the DOI Method. Diagnostician — classifies what's causing friction and routes to the right intervention type. This is where DOI's People → Process → Tools philosophy meets SONAR-style bottleneck analysis.
+Phase 7 of the DOI Method. Diagnostician — classifies what's causing friction and routes to the right intervention type. This is where DOI's People → Process → Tools philosophy meets SONAR-style bottleneck analysis.
 
 ### Role Constraints
 - CAN: Classify bottleneck types, route by automation stage, cross-reference maturity gates
-- CANNOT: Build implementation timeline (Phase 8), prioritize interventions (Phase 8), change prior phase data
+- CANNOT: Build implementation timeline (Phase 9), prioritize interventions (Phase 9), change prior phase data
 
 ### Session Resolution
 Standard DOI session resolution.
 
 ### Prerequisites
-Call `~/.claude/scripts/doi/check-prerequisites.sh 6 <engagement-folder> <dept-slug>`
+Call `~/.claude/scripts/doi/check-prerequisites.sh 7 <engagement-folder> <dept-slug>`
 Required: All role-summary.md files complete for the department.
+Also read all `outcome-map.md` files for the department to tag bottlenecks with blocked outcomes.
 
 ### Bottleneck Types
 
@@ -83,8 +84,8 @@ Within each bottleneck type, the automation stage determines what kind of interv
 ### Process
 1. Read `3c-report.md` + all `role-summary.md` files for the current department
 2. Read all task files to access friction scores and context
-3. For each HIGH-friction task (score >= 10/15): classify bottleneck type(s)
-4. For each MODERATE-friction task (score >= 6/15): classify bottleneck type(s)
+3. For each HIGH-friction task (score >= 10/15): classify bottleneck type(s). When classifying each task, also note which result(s) the task serves (from outcome-map.md). Tag the bottleneck: "This is a [Bottleneck Type] bottleneck blocking [R# — result name]." Include in both the working classification AND the output.
+4. For each MODERATE-friction task (score >= 6/15): classify bottleneck type(s). Same outcome tagging as step 3.
 5. Low-friction tasks (< 6/15): skip — not worth routing
 6. For each classified task, route to the intervention table based on bottleneck type + stage
 7. Group results by bottleneck type, then by stage within each
@@ -92,7 +93,7 @@ Within each bottleneck type, the automation stage determines what kind of interv
    - Stage 1-2 interventions: can begin immediately
    - Stage 3-4 interventions: BLOCKED until maturity reaches Level 3
 9. Write `gap-analysis.md`
-10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 6"`
+10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 7"`
 
 ### Output Format
 `departments/{dept-slug}/gap-analysis.md`:
@@ -124,9 +125,9 @@ Fix in this order. Tools without process = automating chaos. Process without peo
 ### Tools Bottlenecks ([N] tasks)
 
 #### Stage 1 — Integrate Existing Tools ([N] tasks)
-| Task | Role | Friction | Intervention |
-|---|---|---|---|
-| [task name] | [role] | [score]/15 | [specific intervention — not generic] |
+| Task | Role | Friction | Intervention | Result Blocked |
+|---|---|---|---|---|
+| [task name] | [role] | [score]/15 | [specific intervention — not generic] | [R# — result name, or "No defined result"] |
 
 #### Stage 2 — Add AI Tool ([N] tasks)
 [same table format]
@@ -166,8 +167,8 @@ Foundation supports all intervention stages. Consistency and Clarity are establi
 - Intervention descriptions must be SPECIFIC to the task ("Connect HubSpot to Google Sheets via Zapier" not "Integrate tools")
 - Include the Foundation Check — always cross-reference maturity level
 - Stage 3-4 interventions MUST be flagged as gated when maturity < Level 3
-- Do NOT build the implementation timeline — that's Phase 8
-- Do NOT prioritize interventions — that's Phase 8
+- Do NOT build the implementation timeline — that's Phase 9
+- Do NOT prioritize interventions — that's Phase 9
 - Do NOT change friction scores or automation stages from prior phases
 - Bottleneck summary counts must match the detailed sections
 
