@@ -124,7 +124,7 @@ This file is the navigation map for the entire engagement — every subsequent p
 
 ### Constraints
 
-- Do NOT start analyzing tasks or classifying stages — that's Phase 4
+- Do NOT start analyzing tasks or classifying stages — that's Phase 5
 - Do NOT score anything
 - Accept materials in whatever format the user can provide — be flexible
 - If verbal description only, capture faithfully as-is in the user's words
@@ -139,7 +139,7 @@ This file is the navigation map for the entire engagement — every subsequent p
 | Mistake | Fix |
 |---|---|
 | Demanding formal documents | Accept ANY format — verbal, pasted text, bullet lists |
-| Starting to analyze tasks | Stop — analysis is Phase 4, after verification |
+| Starting to analyze tasks | Stop — analysis is Phase 5, after verification and outcome mapping |
 | Combining departments | One department at a time |
 | Missing materials confirmation | Always ask "Anything else to add?" before moving on |
 | Not creating department.json status | Write department.md with tools and team info |
