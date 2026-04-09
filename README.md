@@ -8,10 +8,11 @@ DOI walks organizations through a structured assessment: from initial maturity e
 
 1. **Assesses** organizational digital maturity (Level 1-5) with hard cap gates
 2. **Verifies** that documented roles match actual day-to-day reality
-3. **Classifies** every task by AI automation potential (4-stage framework)
-4. **Measures** friction across the Three C's (Consistency, Clarity, Capacity) at task, role, and department levels (Friction Tax)
-5. **Routes** bottlenecks through People → Process → Tools
-6. **Produces** a tiered implementation roadmap with projected impact
+3. **Maps** solution-agnostic business outcomes at the role level and tags tasks to those outcomes
+4. **Classifies** every task by AI automation potential (4-stage framework)
+5. **Measures** friction across the Three C's (Consistency, Clarity, Capacity) at task, role, and department levels (Friction Tax)
+6. **Routes** bottlenecks through People → Process → Tools
+7. **Produces** a tiered implementation roadmap with projected impact
 
 ## Quick Start
 
@@ -33,25 +34,26 @@ Then open Claude Code and type:
 - Claude Max or Team subscription
 - macOS or Linux (Windows via WSL)
 
-## The 9 Phases
+## The 10 Phases
 
 | Phase | Skill | What It Does |
 |---|---|---|
 | 0 | `/doi-intake` | Gather organization context |
 | 1 | `/doi-assess` | 30-question maturity checklist (Level 1-5) |
-| 2 | `/doi-setup` | Set up departments, roles, gather materials |
+| 2 | `/doi-setup` | Set up departments, roles, gather materials + department outcomes |
 | 3 | `/doi-verify` | Verify roles against actual day-to-day |
-| 4 | `/doi-roles` | Extract + classify tasks (4-stage AI framework) |
-| 5 | `/doi-friction` | Score friction (Three C's → Friction Tax) |
-| 6 | `/doi-route` | Classify bottlenecks (People/Process/Tools) |
-| 7 | `/doi-pillars` | Score foundational + advanced pillars |
-| 8 | `/doi-roadmap` | Build tiered implementation roadmap |
+| 4 | `/doi-outcomes` | Map role-level results, success signals, task alignment |
+| 5 | `/doi-roles` | Extract + classify tasks (4-stage AI framework, outcome-aware) |
+| 6 | `/doi-friction` | Score friction (Three C's → Friction Tax) |
+| 7 | `/doi-route` | Classify bottlenecks (People/Process/Tools, outcome-tagged) |
+| 8 | `/doi-pillars` | Score foundational + advanced pillars |
+| 9 | `/doi-roadmap` | Build outcome-weighted implementation roadmap |
 
 Use `/doi-run` for the full orchestrated engagement, or invoke individual phases standalone.
 
 ## Components
 
-- **10 skills** — orchestrator + 9 phase skills
+- **11 skills** — orchestrator + 10 phase skills (including outcome mapping)
 - **1 agent** — isolated critic (reviews every phase output)
 - **6 scripts** — computation, scoring, state management
 
@@ -89,6 +91,17 @@ The outcomes DOI is building toward. They arrive in a chain — each is a prereq
 > "Without Consistency, you can't have real Clarity. If your data is messy, your dashboards are misleading. Without Clarity, you can't confidently identify bottlenecks and unlock Capacity. You'd be scaling blind."
 
 Phase 5 scores every task across these three dimensions. The Friction Tax is derived from those scores.
+
+### Outcome Mapping
+
+Phase 4 captures solution-agnostic results at the role level — what the role needs to produce for the people who depend on it, not the tasks or deliverables. Each outcome has a success signal ("how would you know it's working?") and measurement status.
+
+Tasks are tagged to outcomes: aligned, indirectly aligned, or unaligned. This data flows through the rest of the engagement:
+- Phase 5 skips microservice decomposition for unaligned tasks
+- Phase 7 tags bottlenecks with the outcomes they block
+- Phase 9 uses outcome alignment as a prioritization axis (20% weight)
+
+The roadmap surfaces "Work That Lacks Defined Outcomes" before recommending what to automate, and "Outcome Gaps" after — results that matter but have no supporting process.
 
 ### Friction Tax
 
