@@ -12,7 +12,7 @@
 
 ---
 
-DOI (Digital Operations Intelligence) is a structured engagement methodology for assessing an organization's operations and building a concrete AI implementation roadmap — from maturity scoring through role verification, outcome mapping, friction analysis, and tiered recommendations.
+DOI (Digital Operations Institute) is a structured engagement methodology for assessing an organization's operations and building a concrete AI implementation roadmap — from maturity scoring through role verification, outcome mapping, friction analysis, and tiered recommendations.
 
 Designed for consultants running AI readiness engagements with clients. Also works for operations teams assessing their own organization.
 

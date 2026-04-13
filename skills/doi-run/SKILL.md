@@ -14,7 +14,7 @@ metadata:
 
 ## 1. Overview
 
-DOI-run is the master conductor for the Digital Operations Intelligence Method. It chains all 10 phase skills in sequence, triggers the `doi-review` critic agent after key phases, presents human gates between phases, and manages engagement state throughout the entire assessment lifecycle.
+DOI-run is the master conductor for the Digital Operations Institute Method. It chains all 10 phase skills in sequence, triggers the `doi-review` critic agent after key phases, presents human gates between phases, and manages engagement state throughout the entire assessment lifecycle.
 
 DOI-run never performs analysis itself. It only invokes skills and manages flow. Each phase skill is responsible for its own domain-specific work. DOI-run is responsible for sequencing, review orchestration, gate enforcement, and state persistence.
 
