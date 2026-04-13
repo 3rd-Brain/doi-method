@@ -1,6 +1,6 @@
 ---
 name: doi-run
-description: "Use when conducting a full DOI engagement — walks an organization through all assessment phases from intake through implementation roadmap. Orchestrates doi-intake, doi-assess, doi-setup, doi-verify, doi-roles, doi-friction, doi-route, doi-pillars, and doi-roadmap with critic reviews and human gates between each phase."
+description: "Use when conducting a full DOI engagement — walks an organization through all assessment phases from intake through implementation roadmap. Orchestrates doi-intake, doi-assess, doi-setup, doi-verify, doi-outcomes, doi-roles, doi-friction, doi-route, doi-pillars, and doi-roadmap with critic reviews and human gates between each phase."
 license: proprietary
 metadata:
   version: 1.0.0
@@ -14,7 +14,7 @@ metadata:
 
 ## 1. Overview
 
-DOI-run is the master conductor for the Digital Operations Intelligence Method. It chains all 9 phase skills in sequence, triggers the `doi-review` critic agent after key phases, presents human gates between phases, and manages engagement state throughout the entire assessment lifecycle.
+DOI-run is the master conductor for the Digital Operations Intelligence Method. It chains all 10 phase skills in sequence, triggers the `doi-review` critic agent after key phases, presents human gates between phases, and manages engagement state throughout the entire assessment lifecycle.
 
 DOI-run never performs analysis itself. It only invokes skills and manages flow. Each phase skill is responsible for its own domain-specific work. DOI-run is responsible for sequencing, review orchestration, gate enforcement, and state persistence.
 
@@ -47,22 +47,24 @@ Phase 2: doi-setup (per department)
   |                                               |
   |  Phase 3: doi-verify --> [CRITIC] --> GATE    |
   |    |                                          |
-  |  Phase 4: doi-roles --> [CRITIC] --> GATE     |
+  |  Phase 4: doi-outcomes --> [CRITIC] --> GATE  |
   |    |                                          |
-  |  Phase 5: doi-friction --> [CRITIC] --> GATE  |
+  |  Phase 5: doi-roles --> [CRITIC] --> GATE     |
+  |    |                                          |
+  |  Phase 6: doi-friction --> [CRITIC] --> GATE  |
   |    |                                          |
   |  (next role or exit loop)                     |
   |                                               |
   +-----------------------------------------------+
   |
-Phase 6: doi-route --> [CRITIC REVIEW] --> HUMAN GATE
+Phase 7: doi-route --> [CRITIC REVIEW] --> HUMAN GATE
   |
-Phase 7: doi-pillars --> [CRITIC REVIEW] --> HUMAN GATE
+Phase 8: doi-pillars --> [CRITIC REVIEW] --> HUMAN GATE
   |
-Phase 8: doi-roadmap --> [CRITIC REVIEW] --> HUMAN GATE --> COMPLETE
+Phase 9: doi-roadmap --> [CRITIC REVIEW] --> HUMAN GATE --> COMPLETE
 ```
 
-Then repeat Phases 2-8 for the next department. When all departments are complete, generate the org-wide summary.
+Then repeat Phases 2-9 for the next department. When all departments are complete, generate the org-wide summary.
 
 ## 4. Invoking Phase Skills
 
@@ -74,7 +76,7 @@ For each phase in the sequence:
 
 ## 5. Critic Review
 
-After Phases 1, 3, 4, 5, 6, 7, and 8, trigger an independent critic review:
+After Phases 1, 3, 4, 5, 6, 7, 8, and 9, trigger an independent critic review:
 
 1. Spawn the `doi-review` agent with:
    - The phase number
@@ -83,7 +85,7 @@ After Phases 1, 3, 4, 5, 6, 7, and 8, trigger an independent critic review:
 2. The critic runs in isolation — it has never seen the conversation and evaluates output on its own merits.
 3. Save critic output to:
    - `reviews/phase{N}-review.md` for department-level phases
-   - `reviews/phase{N}-{role-slug}-review.md` for per-role phases (3, 4, 5)
+   - `reviews/phase{N}-{role-slug}-review.md` for per-role phases (3, 4, 5, 6)
 4. Present the critic's summary at the subsequent human gate.
 
 ## 6. Human Gates
@@ -141,7 +143,7 @@ The registry is updated automatically by the script.
 
 ## 8. Per-Role Loop Management
 
-During Phases 3-5, state tracks the current position within the role loop:
+During Phases 3-6, state tracks the current position within the role loop:
 
 ```yaml
 current_department: marketing
@@ -153,15 +155,15 @@ roles_remaining:
   - analytics-coordinator
 ```
 
-When a role completes all of Phases 3, 4, and 5:
+When a role completes all of Phases 3, 4, 5, and 6:
 
 1. Update state: move the role from `roles_remaining` to `roles_completed`.
-2. If `roles_remaining` is empty, exit the loop and proceed to Phase 6.
+2. If `roles_remaining` is empty, exit the loop and proceed to Phase 7.
 3. If roles remain, prompt the user: "Moving to the next role: [name]. Ready?"
 
 ## 9. Department Loop Management
 
-After Phase 8 completes for a department:
+After Phase 9 completes for a department:
 
 1. Update state: move the department from `departments_remaining` to `departments_completed`.
 2. If departments remain, prompt: "Department complete. Next: [name]. Ready to set up?"
@@ -226,12 +228,13 @@ When doi-run is invoked and the registry contains active or paused engagements:
 
 | Phase | Skill | What It Does | Critic Review | Human Gate |
 |---|---|---|---|---|
-| 0 | doi-intake | Collects org info, identifies departments, creates engagement workspace | No | No |
-| 1 | doi-assess | Assesses department AI/automation maturity level | Yes | Yes |
-| 2 | doi-setup | Inventories roles, tools, and workflows for a department | No | No |
-| 3 | doi-verify | Observes client systems directly + validates role data through structured questioning | Yes | Yes |
-| 4 | doi-roles | Researches tool APIs/capabilities, then analyzes role-level automation opportunities | Yes | Yes |
-| 5 | doi-friction | Identifies friction points and quantifies friction tax | Yes | Yes |
-| 6 | doi-route | Routes opportunities to appropriate solution categories | Yes | Yes |
-| 7 | doi-pillars | Maps solutions to DOI implementation pillars | Yes | Yes |
-| 8 | doi-roadmap | Builds phased implementation roadmap with priorities | Yes | Yes |
+| 0 | doi-intake | Collects org info, creates engagement workspace | No | No |
+| 1 | doi-assess | Assesses organizational digital maturity level | Yes | Yes |
+| 2 | doi-setup | Inventories roles, tools, workflows + department outcomes | No | No |
+| 3 | doi-verify | Observes client systems + validates role data | Yes | Yes |
+| 4 | doi-outcomes | Maps role-level results, success signals, task alignment | Yes | Yes |
+| 5 | doi-roles | Researches tool APIs, classifies tasks (outcome-aware) | Yes | Yes |
+| 6 | doi-friction | Scores friction via Three C's (outcome context) | Yes | Yes |
+| 7 | doi-route | Routes bottlenecks (outcome-tagged) | Yes | Yes |
+| 8 | doi-pillars | Scores maturity pillars (outcome coverage evidence) | Yes | Yes |
+| 9 | doi-roadmap | Builds outcome-weighted implementation roadmap | Yes | Yes |

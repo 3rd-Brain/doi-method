@@ -12,14 +12,14 @@ metadata:
 
 ### Overview
 
-Phase 4 of the DOI Method. Analyst — extracts tasks from verified role profiles, classifies automation potential, and decomposes into implementable units. This is the technical core of DOI.
+Phase 5 of the DOI Method. Analyst — extracts tasks from verified role profiles, classifies automation potential, and decomposes into implementable units. This is the technical core of DOI.
 
 Before classifying tasks or decomposing microservices, this phase researches the client's actual software capabilities — API docs, integration catalogs, automation features — so that workflow steps and microservice designs reference real, verified capabilities rather than assumptions.
 
 ### Role Constraints
 
 - CAN: Research tool APIs/capabilities, extract tasks, classify automation stages, map LLM functions, apply KOODAR, decompose microservices
-- CANNOT: Score friction (Phase 5), route bottlenecks (Phase 6), recommend implementation order (Phase 8)
+- CANNOT: Score friction (Phase 6), route bottlenecks (Phase 7), recommend implementation order (Phase 9)
 
 ### Session Resolution
 
@@ -27,8 +27,9 @@ Standard DOI session resolution.
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 4 <engagement-folder> <dept-slug> <role-slug>`
+Call `~/.claude/scripts/doi/check-prerequisites.sh 5 <engagement-folder> <dept-slug> <role-slug>`
 Required: `roles/{role-slug}/verified-role.md` must exist.
+Also read: `roles/{role-slug}/outcome-map.md` for outcome alignment data from Phase 4.
 
 ### The 4-Stage AI Framework
 
@@ -67,7 +68,7 @@ Military decision-making cycle applied to task scoping:
 
 ### Process
 
-1. Read `verified-role.md` for the current role
+1. Read `verified-role.md` AND `outcome-map.md` for the current role
 2. **Tool/API Research** — before classifying anything, research the client's actual software stack. See the Tool/API Research section below for full details. Save findings to `roles/{role-slug}/integration-research.md`.
 3. **Task Extraction** — extract every distinct task into frequency categories:
    - Quarterly (3-month recurring)
@@ -84,8 +85,9 @@ Military decision-making cycle applied to task scoping:
    - Stage (1-4) with reasoning and confidence score (0-1)
    - Effort Level: Low / Medium / High / Continuous
    - 8 Core LLM Functions (which apply and why)
-   - KOODAR (6 dimensions — Observe/Orient = N/A for Stage 1-2)
+   - KOODAR (6 dimensions — Observe/Orient = N/A for Stage 1-3)
    - Workflow Steps — reference REAL API endpoints, integrations, and tool features from tool-capabilities.md
+   - Outcome Alignment — populated from outcome-map.md (aligned/indirect/unaligned)
 6. Save each task as `tasks/{task-slug}.md` with full classification
 7. For Stage 2-4 tasks, run Microservice Decomposition:
    - Stage 1: SKIP (no AI, no microservices)
@@ -93,10 +95,11 @@ Military decision-making cycle applied to task scoping:
    - Stage 3: 2-5 microservices (break into coordinated AI tools)
    - Stage 4: 3-8+ microservices (comprehensive autonomous capabilities)
    - Each microservice must reference verified tool capabilities — no fictional API endpoints
+   - **Skip for unaligned tasks** (outcome_alignment = unaligned from outcome-map.md). No point designing AI architecture for work that may not serve a defined result.
    - Save to `microservices/{task-slug}-microservices.md`
 8. Present the extracted task list to the user. Use AskUserQuestion: "Here are the [N] tasks I extracted for [role name]. Is anything missing or wrong?" — this is their last chance to add tasks before classification begins.
 9. Call `~/.claude/scripts/doi/aggregate-snapshot.sh <folder> <dept-slug> <role-slug>`
-10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 4"`
+10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 5"`
 
 ### Tool/API Research Step (Detail for Step 2)
 
@@ -180,6 +183,7 @@ frequency: [daily/weekly/monthly/quarterly/triggered/infinite]
 stage: [1-4]
 effort: [low/medium/high/continuous]
 confidence: [0.0-1.0]
+outcome_alignment: [aligned/indirect/unaligned]
 ---
 
 # [Task Name]
@@ -217,6 +221,10 @@ confidence: [0.0-1.0]
 | Decide | [decision boundaries] |
 | Act | [execution summary] |
 | Review | [evaluation method] |
+
+## Outcome Alignment
+**Alignment:** [Aligned/Indirect/Unaligned]
+**Result(s):** [R# — result name, or "No defined result mapped"]
 ```
 
 ### Microservice Output Format
@@ -267,8 +275,9 @@ microservice_count: [N]
 - Workflow steps must reference REAL API endpoints and integrations from integration-research.md — not generic "connect to API"
 - Microservice counts MUST follow stage rules: Stage 1=0, Stage 2=1, Stage 3=2-5, Stage 4=3-8+
 - If integration-research.md shows a limitation (no API, enterprise-only feature, missing integration), the stage classification and workflow must account for it
-- Do NOT score friction — that's Phase 5
-- Do NOT recommend implementation order — that's Phase 8
+- Skip microservice decomposition for unaligned tasks — do not invest API research or microservice design in work that cannot be traced to a defined result.
+- Do NOT score friction — that's Phase 6
+- Do NOT recommend implementation order — that's Phase 9
 - Task slugs: lowercase, hyphens, derived from task name
 
 ### Common Mistakes
@@ -285,3 +294,4 @@ microservice_count: [N]
 | KOODAR Observe/Orient on Stage 1-3 | Must be N/A — only Stage 4 (AI Coworker) has proactive environmental awareness |
 | Stage 1 microservice decomposition | Skip — Stage 1 has no AI component |
 | Generic reasoning | Be specific to this task: "Single input, single output, no judgment" |
+| Decomposing unaligned tasks | Skip microservices for tasks with outcome_alignment = unaligned |

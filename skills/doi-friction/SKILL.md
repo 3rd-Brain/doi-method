@@ -12,7 +12,7 @@ metadata:
 
 ### Overview
 
-Phase 5 of the DOI Method. Measurer — quantifies how much pain each task causes using DOI's **Three C's framework** (Consistency, Clarity, Capacity), then rolls up to role and department level. The Friction Tax is DOI's signature metric: "X% of your capacity is friction, not output." This phase makes invisible operational drag visible and measurable.
+Phase 6 of the DOI Method. Measurer — quantifies how much pain each task causes using DOI's **Three C's framework** (Consistency, Clarity, Capacity), then rolls up to role and department level. The Friction Tax is DOI's signature metric: "X% of your capacity is friction, not output." This phase makes invisible operational drag visible and measurable.
 
 The Three C's are the *outcomes* DOI is building toward. They arrive in a chain — each one is a prerequisite for the next:
 
@@ -31,8 +31,9 @@ Standard DOI session resolution.
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 5 <engagement-folder> <dept-slug> <role-slug>`
+Call `~/.claude/scripts/doi/check-prerequisites.sh 6 <engagement-folder> <dept-slug> <role-slug>`
 Required: Task files must exist in `roles/{role-slug}/tasks/`
+Also read `outcome-map.md` for outcome alignment context when scoring Capacity.
 
 ### The Three C's Friction Dimensions
 
@@ -93,12 +94,12 @@ Used to weight friction by how often the pain occurs:
 3. For EACH task, score across the Three C's:
    - **Consistency:** Does this task produce reliable, standardized results? Based on verification — did the user mention errors, rework, variation, inconsistent outputs?
    - **Clarity:** Is ownership clear? Can anyone check the status? Is the output trusted? Based on verification — handoffs, ambiguous ownership, shadow work
-   - **Capacity:** How much time does this consume relative to value? Use time estimates from verification. Does it block higher-value work?
+   - **Capacity:** How much time does this consume relative to value? Use time estimates from verification. Does it block higher-value work? Reference outcome alignment from outcome-map.md when assessing value. An unaligned task consuming significant time is a capacity problem regardless of friction score — note this in the rationale. Example: "Capacity: 4/5 — consumes ~5 hrs/week and is not mapped to any defined business result (outcome_alignment: unaligned), making the time investment disproportionate to demonstrable value."
 4. For each score, provide a specific rationale (not just a number)
 5. Append friction section to each `tasks/{task-slug}.md`
 6. Call `~/.claude/scripts/doi/calculate-friction.sh role <folder> <dept-slug> <role-slug>`
 7. After ALL roles in the department are friction-scored, call `~/.claude/scripts/doi/calculate-friction.sh department <folder> <dept-slug>`
-8. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 5"`
+8. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 6"`
 
 ### Per-Task Friction Output
 
@@ -122,8 +123,8 @@ Appended to existing `tasks/{task-slug}.md`:
 - Consistency MUST account for error frequency AND task frequency (a daily task with errors = 5, a quarterly task with rare errors = 1)
 - Clarity score must reflect what verification revealed about ownership and handoffs
 - Every dimension needs a SPECIFIC rationale — not just a number
-- Do NOT recommend solutions or prioritize fixes — that's Phase 6 and 8
-- Do NOT change automation stage classifications from Phase 4
+- Do NOT recommend solutions or prioritize fixes — that's Phase 7 and 9
+- Do NOT change automation stage classifications from Phase 5
 - Friction Tax is COMPUTED by the script — present the script's numbers, don't estimate
 - Present the Friction Tax in plain language: "42% means 42 cents of every dollar of effort in this role is friction, not productive output"
 - If a task has no friction data from verification (no time estimate, no error mentions), use AskUserQuestion to gather it: "I need a bit more info on [task name] to score it accurately. How consistent are the results, and how much time does it take?"

@@ -57,7 +57,7 @@ case "$PHASE" in
         ;;
 
     4)
-        # Phase 4 (Role Pipeline): verified-role.md for the role
+        # Phase 4 (Outcome Mapping): verified-role.md must exist
         if [ -z "$DEPT_SLUG" ] || [ -z "$ROLE_SLUG" ]; then
             echo "ERROR: Phase 4 requires dept-slug and role-slug"
             exit 1
@@ -66,18 +66,27 @@ case "$PHASE" in
         ;;
 
     5)
-        # Phase 5 (Friction): task files must exist for the role
+        # Phase 5 (Role Pipeline): verified-role.md for the role
         if [ -z "$DEPT_SLUG" ] || [ -z "$ROLE_SLUG" ]; then
             echo "ERROR: Phase 5 requires dept-slug and role-slug"
+            exit 1
+        fi
+        check_file "$ENGAGEMENT_DIR/departments/$DEPT_SLUG/roles/$ROLE_SLUG/verified-role.md"
+        ;;
+
+    6)
+        # Phase 6 (Friction): task files must exist for the role
+        if [ -z "$DEPT_SLUG" ] || [ -z "$ROLE_SLUG" ]; then
+            echo "ERROR: Phase 6 requires dept-slug and role-slug"
             exit 1
         fi
         check_dir_has_files "$ENGAGEMENT_DIR/departments/$DEPT_SLUG/roles/$ROLE_SLUG/tasks"
         ;;
 
-    6)
-        # Phase 6 (Bottleneck Routing): all role summaries in department
+    7)
+        # Phase 7 (Bottleneck Routing): all role summaries in department
         if [ -z "$DEPT_SLUG" ]; then
-            echo "ERROR: Phase 6 requires dept-slug"
+            echo "ERROR: Phase 7 requires dept-slug"
             exit 1
         fi
         DEPT_DIR="$ENGAGEMENT_DIR/departments/$DEPT_SLUG"
@@ -91,10 +100,10 @@ case "$PHASE" in
         fi
         ;;
 
-    7)
-        # Phase 7 (Pillar Assessment): all role summaries + gap analysis
+    8)
+        # Phase 8 (Pillar Assessment): all role summaries + gap analysis
         if [ -z "$DEPT_SLUG" ]; then
-            echo "ERROR: Phase 7 requires dept-slug"
+            echo "ERROR: Phase 8 requires dept-slug"
             exit 1
         fi
         DEPT_DIR="$ENGAGEMENT_DIR/departments/$DEPT_SLUG"
@@ -107,10 +116,10 @@ case "$PHASE" in
         fi
         ;;
 
-    8)
-        # Phase 8 (Roadmap): foundational assessment + 3c-report + gap analysis must exist
+    9)
+        # Phase 9 (Roadmap): foundational assessment + 3c-report + gap analysis must exist
         if [ -z "$DEPT_SLUG" ]; then
-            echo "ERROR: Phase 8 requires dept-slug"
+            echo "ERROR: Phase 9 requires dept-slug"
             exit 1
         fi
         DEPT_DIR="$ENGAGEMENT_DIR/departments/$DEPT_SLUG"
@@ -120,7 +129,7 @@ case "$PHASE" in
         ;;
 
     *)
-        echo "ERROR: Unknown phase '$PHASE'. Valid phases: 0-8"
+        echo "ERROR: Unknown phase '$PHASE'. Valid phases: 0-9"
         exit 1
         ;;
 esac

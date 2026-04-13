@@ -38,10 +38,12 @@ Required: `assessments/maturity-assessment.md` must exist.
    - "What is [department]'s primary function?"
    - "How many people are on the [department] team?"
    - "What tools and software does [department] use? (CRM, project management, communication, file storage — list everything)"
-4. Create `departments/{dept-slug}/department.md`
-5. Call `~/.claude/scripts/doi/init-workspace.sh <folder> <dept-slug>`
-6. Use AskUserQuestion: "Which department would you like to assess first?"
-7. Update `.doi-state.md` with departments_remaining and current_department
+4. Use AskUserQuestion: "What results does [department] need to deliver to the business? Not the tasks or reports — the actual results that matter if they stopped happening."
+5. For each result identified, use AskUserQuestion: "How would someone know that result is being achieved well?"
+6. Create `departments/{dept-slug}/department.md`
+7. Call `~/.claude/scripts/doi/init-workspace.sh <folder> <dept-slug>`
+8. Use AskUserQuestion: "Which department would you like to assess first?"
+9. Update `.doi-state.md` with departments_remaining and current_department
 
 #### Role Identification
 
@@ -110,11 +112,19 @@ This file is the navigation map for the entire engagement — every subsequent p
 **Team Size:** [number]
 **Tools:** [comma-separated list]
 **Date:** [YYYY-MM-DD]
+
+## Department Outcomes
+| ID | Result | Success Signal |
+|---|---|---|
+| DO1 | [solution-agnostic result statement] | [how you'd know it's working] |
+| DO2 | ... | ... |
+
+*If no outcomes can be articulated, record: "No department-level outcomes could be articulated during setup. This is a maturity signal — the department operates on tasks and deliverables rather than defined results."*
 ```
 
 ### Constraints
 
-- Do NOT start analyzing tasks or classifying stages — that's Phase 4
+- Do NOT start analyzing tasks or classifying stages — that's Phase 5
 - Do NOT score anything
 - Accept materials in whatever format the user can provide — be flexible
 - If verbal description only, capture faithfully as-is in the user's words
@@ -129,7 +139,7 @@ This file is the navigation map for the entire engagement — every subsequent p
 | Mistake | Fix |
 |---|---|
 | Demanding formal documents | Accept ANY format — verbal, pasted text, bullet lists |
-| Starting to analyze tasks | Stop — analysis is Phase 4, after verification |
+| Starting to analyze tasks | Stop — analysis is Phase 5, after verification and outcome mapping |
 | Combining departments | One department at a time |
 | Missing materials confirmation | Always ask "Anything else to add?" before moving on |
 | Not creating department.json status | Write department.md with tools and team info |

@@ -11,7 +11,7 @@ metadata:
 ---
 
 ### Overview
-Phase 8 of the DOI Method. Planner — the final deliverable. Synthesizes everything from prior phases into an actionable, sequenced implementation roadmap. Prioritizes interventions, sorts into tiers, sequences within tiers, and projects impact.
+Phase 9 of the DOI Method. Planner — the final deliverable. Synthesizes everything from prior phases into an actionable, sequenced implementation roadmap. Prioritizes interventions, sorts into tiers, sequences within tiers, and projects impact.
 
 ### Role Constraints
 - CAN: Prioritize interventions, sequence implementation, project impact, produce the final deliverable
@@ -21,7 +21,7 @@ Phase 8 of the DOI Method. Planner — the final deliverable. Synthesizes everyt
 Standard DOI session resolution.
 
 ### Prerequisites
-Call `~/.claude/scripts/doi/check-prerequisites.sh 8 <engagement-folder> <dept-slug>`
+Call `~/.claude/scripts/doi/check-prerequisites.sh 9 <engagement-folder> <dept-slug>`
 Required: foundational.md + 3c-report.md + gap-analysis.md
 
 ### Required Inputs
@@ -32,16 +32,24 @@ Read ALL of these before starting:
 - `3c-report.md` — department Friction Tax
 - `gap-analysis.md` — routing + intervention types
 - `assessments/foundational.md` (+ `advanced.md` if exists) — pillar scores
+- All `roles/*/outcome-map.md` — outcome alignment and gaps
 
 ### Prioritization Framework
-Score each intervention on 4 axes:
+Score each intervention on 5 axes:
 
 | Axis | Weight | What it measures |
 |---|---|---|
-| Friction Recovered | 40% | How much pain does this eliminate? (from friction scores) |
-| Implementation Complexity | 25% | How hard to build? (Stage 1 = easy, Stage 4 = hard) |
-| Foundation Dependency | 20% | Does this require higher maturity? (gated or not) |
-| Cascade Potential | 15% | Does fixing this unblock other improvements? |
+| Friction Recovered | 35% | How much pain does this eliminate? (from friction scores) |
+| Outcome Alignment | 20% | Does this advance a defined, measured result? |
+| Implementation Complexity | 20% | How hard to build? (Stage 1 = easy, Stage 4 = hard) |
+| Foundation Dependency | 15% | Does this require higher maturity? (gated or not) |
+| Cascade Potential | 10% | Does fixing this unblock other improvements? |
+
+**Outcome Alignment scoring:**
+- Task aligned to a measured result: high
+- Task aligned to an unmeasured result: medium
+- Task indirectly aligned: low-medium
+- Task unaligned: low
 
 ### Tier Classification
 | Tier | Criteria | When to Start |
@@ -78,23 +86,24 @@ Within each tier, respect:
 
 ### Process
 1. Read all prior phase outputs
-2. List every intervention from gap-analysis.md
-3. Score each on the 4 prioritization axes
-4. Sort into tiers
-5. Sequence within tiers following the rules above
-6. For each intervention, specify:
+2. Read all `outcome-map.md` files. Compile: (1) list of unaligned tasks with their friction and time data, (2) list of outcome gaps across all roles.
+3. List every intervention from gap-analysis.md
+4. Score each on the 5 prioritization axes
+5. Sort into tiers
+6. Sequence within tiers following the rules above
+7. For each intervention, specify:
    - What to do (specific, actionable)
    - Which bottleneck it addresses (People/Process/Tools)
    - Which tasks it impacts (with friction scores)
    - Friction recovered (estimated reduction in friction points)
    - Prerequisites (what must be done first)
-7. Calculate projected impact:
+8. Calculate projected impact:
    - Current Friction Tax → Projected Friction Tax after Tier 1
    - Current maturity → Projected level after Tier 1 + Tier 2
-8. Write Foundation Progress Tracker (hard cap gates with current/projected status)
-9. Write "What Not to Do Yet" section
-10. Write `roadmap.md` in the department directory
-11. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 8"`
+9. Write Foundation Progress Tracker (hard cap gates with current/projected status)
+10. Write "What Not to Do Yet" section
+11. Write `roadmap.md` in the department directory
+12. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 9"`
 
 ### Output Format
 `roadmap.md`:
@@ -117,6 +126,15 @@ generated: [YYYY-MM-DD]
 - **Department Friction Tax:** [N]%
 - **Primary Goal:** [from company-profile.md]
 - **Biggest Pain:** [highest friction dimension and what it means]
+
+## Work That Lacks Defined Outcomes
+*These tasks consume operational capacity but could not be traced to a defined business result during the assessment. This is not a recommendation to eliminate — there may be context the assessment didn't capture. The organization should evaluate whether to continue, redefine, or stop this work before investing in automation.*
+
+| Task | Role | Hours/Week | Friction | Current Status |
+|---|---|---|---|---|
+| [task name] | [role] | [estimated time] | [score]/15 | [what happens with it now] |
+
+**Total unaligned capacity:** ~[N] hours/week across [M] roles
 
 ## Tier 1: Quick Wins
 *High impact, low complexity, start immediately. No foundation work required.*
@@ -144,6 +162,13 @@ generated: [YYYY-MM-DD]
 *Requires Level 3 foundation. Plan now, execute after Tier 2.*
 
 [Same format — each intervention notes the foundation requirement]
+
+## Outcome Gaps
+*Results identified as important but with no supporting task or process. Future capability planning should address these gaps.*
+
+| Result | Department/Role | Gap | Implication |
+|---|---|---|---|
+| [result name] | [source] | No task supports this result | [what's at risk] |
 
 ## People → Process → Tools Sequence
 Within each tier, follow this order:
@@ -178,6 +203,7 @@ Within each tier, follow this order:
 - The roadmap must explicitly connect to the primary goal from company-profile.md
 - Present as a plan, not a mandate — the human gate allows the user to adjust priorities
 - Intervention descriptions must be specific and actionable — "Set up HubSpot → Google Sheets Zapier integration for weekly report automation" not "Improve tool integration"
+- Every Tier 1-2 intervention must reference which result it advances. If an intervention addresses an unaligned task, note it serves operational efficiency rather than a defined outcome.
 
 ### Common Mistakes
 | Mistake | Fix |

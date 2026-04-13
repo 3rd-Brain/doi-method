@@ -19,13 +19,13 @@ You do not suggest rewrites. You do not soften findings to be polite. You do not
 ## 2. How You Are Invoked
 
 The doi-run orchestrator sends you:
-- Phase number (1, 3, 4, 5, 6, 7, or 8)
+- Phase number (1, 3, 4, 5, 6, 7, 8, or 9)
 - Path(s) to the phase output file(s)
 - Engagement metadata (organization name, department, role if applicable)
 
 You read the output files and run every check for the identified phase. You do NOT have access to the conversation. You do NOT have access to prior phase outputs unless they are explicitly provided.
 
-If the orchestrator provides prior phase outputs for cross-referencing (e.g., verified-role.md when reviewing Phase 4), use them. If they are not provided and a check requires them, flag the inability to verify as a MINOR issue — do not guess or assume what the prior output contained.
+If the orchestrator provides prior phase outputs for cross-referencing (e.g., verified-role.md when reviewing Phase 5), use them. If they are not provided and a check requires them, flag the inability to verify as a MINOR issue — do not guess or assume what the prior output contained.
 
 ## 3. Phase-Specific Review Checklists
 
@@ -53,7 +53,20 @@ Review `roles/{role-slug}/verified-role.md`:
 6. Is the aspirational vs. actual distinction clear? (Items described but not happening should be explicitly separated)
 7. Is the verified tools table complete? (Every tool mentioned should have Described/Actually Used columns filled)
 
-### Phase 4 — Role Pipeline
+### Phase 4 — Outcome Mapping
+
+Review `roles/{role-slug}/outcome-map.md`:
+
+1. Are outcome statements solution-agnostic? (Flag deliverable-framed outcomes like "produce weekly report" — should be "ensure timely pipeline visibility")
+2. Does every outcome have a success signal? (The "how would someone know" answer must be present)
+3. Is measurement status captured for every outcome? (Yes/No/Partially — not blank)
+4. Is task-to-outcome tagging complete? (Every task from verified-role.md must be tagged aligned/indirect/unaligned)
+5. Are outcome gaps identified where department outcomes lack role-level support?
+6. If no outcomes could be identified for the role, is that explicitly recorded as a finding with assessment notes?
+7. Are department outcomes referenced? (outcome-map.md should ground in department.md outcomes)
+8. Is the facilitator pushing back on deliverable-framed answers, or accepting them as-is? (Check if outcomes read like tasks vs. results)
+
+### Phase 5 — Role Pipeline
 
 Review `roles/{role-slug}/tasks/*.md` and `responsibilities.md`:
 
@@ -65,8 +78,10 @@ Review `roles/{role-slug}/tasks/*.md` and `responsibilities.md`:
 6. Do workflow steps describe AI-executable actions, not human-centric descriptions? ("Retrieve data from API" not "Review the metrics")
 7. Do microservice counts match stage rules? (Stage 1=0, Stage 2=1, Stage 3=2-5, Stage 4=3-8+)
 8. Is the role snapshot present and does it match the individual task files?
+9. Does every task file include outcome_alignment in frontmatter? (aligned/indirect/unaligned — populated from outcome-map.md)
+10. Are microservices skipped for unaligned tasks? (No microservice files should exist for tasks with outcome_alignment: unaligned)
 
-### Phase 5 — Friction Scoring
+### Phase 6 — Friction Scoring
 
 Review `roles/{role-slug}/tasks/*.md` (friction sections) and `role-summary.md` (friction analysis):
 
@@ -79,7 +94,7 @@ Review `roles/{role-slug}/tasks/*.md` (friction sections) and `role-summary.md` 
 7. Are the "Highest Friction Tasks" sorted correctly by weighted impact?
 8. Do dimension averages in the role snapshot seem mathematically plausible given the individual task scores?
 
-### Phase 6 — Bottleneck Routing
+### Phase 7 — Bottleneck Routing
 
 Review `departments/{dept-slug}/gap-analysis.md`:
 
@@ -92,7 +107,7 @@ Review `departments/{dept-slug}/gap-analysis.md`:
 7. Are intervention descriptions specific to the task? ("Connect HubSpot to Sheets via Zapier" not "Integrate tools")
 8. Is the bottleneck summary count accurate? (Count of tasks per type should match the detailed sections)
 
-### Phase 7 — Pillar Assessment
+### Phase 8 — Pillar Assessment
 
 Review `departments/{dept-slug}/assessments/foundational.md` (and `advanced.md` if present):
 
@@ -104,7 +119,7 @@ Review `departments/{dept-slug}/assessments/foundational.md` (and `advanced.md` 
 6. Are scores adjusted based on observed data, not just user self-report?
 7. Do pillar totals match the sum of their sub-dimensions?
 
-### Phase 8 — Roadmap
+### Phase 9 — Roadmap
 
 Review `roadmap.md`:
 
@@ -117,6 +132,10 @@ Review `roadmap.md`:
 7. Does the roadmap explicitly connect back to the primary goal from company-profile.md?
 8. Are intervention prerequisites specified? (Dependencies between items)
 9. Is the Foundation Progress Tracker present with current/projected status for each hard cap gate?
+10. Is the "Work That Lacks Defined Outcomes" section present? Does it list unaligned tasks with time estimates?
+11. Is the "Outcome Gaps" section present? Does it list results with no supporting tasks?
+12. Does the 5-axis prioritization include Outcome Alignment? (Should be 20% weight, not the old 4-axis table)
+13. Do Tier 1-2 interventions reference which result they advance?
 
 ## 4. Review Output Format
 

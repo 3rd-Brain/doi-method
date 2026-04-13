@@ -11,27 +11,27 @@ metadata:
 ---
 
 ### Overview
-Phase 7 of the DOI Method. Assessor — scores department maturity pillars grounded in REAL DATA from prior phases. Unlike traditional self-assessments, every score must cite specific evidence. If the data contradicts what the user might expect, score based on the data and explain why.
+Phase 8 of the DOI Method. Assessor — scores department maturity pillars grounded in REAL DATA from prior phases. Unlike traditional self-assessments, every score must cite specific evidence. If the data contradicts what the user might expect, score based on the data and explain why.
 
 ### Role Constraints
 - CAN: Score pillars, cite evidence, validate tools against reality, apply gate checks
-- CANNOT: Recommend interventions (Phase 8), build roadmaps (Phase 8), adjust prior phase data
+- CANNOT: Recommend interventions (Phase 9), build roadmaps (Phase 9), adjust prior phase data
 
 ### Session Resolution
 Standard DOI session resolution.
 
 ### Prerequisites
-Call `~/.claude/scripts/doi/check-prerequisites.sh 7 <engagement-folder> <dept-slug>`
+Call `~/.claude/scripts/doi/check-prerequisites.sh 8 <engagement-folder> <dept-slug>`
 Required: All role-summary.md files + gap-analysis.md must exist.
 
 ### Foundational Assessment — 3 Pillars (9 sub-dimensions, 1-5 each)
 
 | Pillar | Sub-dimension | Score Informed By |
 |---|---|---|
-| **Talent Strategy** (People) | Team Structure | Role snapshots — are roles clearly defined? Digital-first? |
+| **Talent Strategy** (People) | Team Structure | Role snapshots — are roles clearly defined? Digital-first? Outcome maps — are roles organized around defined results with success signals, or just task lists? Roles with 0 defined outcomes score lower. |
 | | Skills Development | Verification — skills gaps found? Training happening? |
 | | Training & Adoption | Verification — tool adoption comfort? Resistance? |
-| **Workflow Optimization** (Process) | Process Mapping | Verification — how many processes were undocumented? |
+| **Workflow Optimization** (Process) | Process Mapping | Verification — how many processes were undocumented? Outcome maps — are processes connected to measured results, or documented as steps without a clear "what good looks like"? High unaligned-task ratios indicate process mapping without purpose. |
 | | Automation Design | Bottleneck analysis — automation opportunities identified? |
 | | Efficiency Optimization | Friction report — are bottlenecks being addressed? |
 | **Digital Architecture** (Tools) | System Design | Department tools list — intentional stack or accidental accumulation? |
@@ -57,6 +57,7 @@ Each pillar advances the 3 Cs in a specific way. Use this as your scoring lens �
 - EVERY score MUST cite specific evidence from prior phases
 - If evidence contradicts a seemingly high score, score based on evidence and explain
 - "The team seems capable" = NOT acceptable. "Role summaries show 3 clearly defined roles with distinct responsibilities, but verification found 4 undocumented cross-role tasks suggesting boundary blur" = acceptable
+- Outcome maps from Phase 4 provide evidence for pillar scoring. Roles with defined, measured results indicate higher maturity. Roles operating on tasks without articulated results indicate lower maturity.
 
 ### Foundational Levels
 
@@ -97,7 +98,7 @@ Only if gate passes:
 | Pillar | Sub-dimension | Score Informed By |
 |---|---|---|
 | **Knowledge Management** (Process) | Documentation | Verification — what % of processes were documented? |
-| | Business Intelligence | Friction report — data-driven decisions happening? |
+| | Business Intelligence | Friction report — data-driven decisions happening? Outcome maps — what percentage of role results have active measurement mechanisms? Unmeasured results indicate BI gaps regardless of dashboard tooling. |
 | | Process Standards | Verification — enforced standards or tribal knowledge? |
 | **AI Automation** (Tools) | AI Tool Selection | Bottleneck analysis — intentional AI evaluation happening? |
 | | System Deployment | Role snapshots — any Stage 3-4 tasks currently operational? |
@@ -124,14 +125,14 @@ Use this as the scoring reference — where a pillar sits on this table is what 
 A sub-dimension score of 3 = the pillar is at Level 3 behavior. Score 2 = Level 2 behavior. This table is the evidence-to-score translation key.
 
 ### Process
-1. Read ALL prior phase outputs: role-summary.md files, 3c-report.md, gap-analysis.md, maturity-assessment.md
+1. Read ALL prior phase outputs: role-summary.md files, 3c-report.md, gap-analysis.md, maturity-assessment.md, and all `outcome-map.md` files
 2. Score each foundational sub-dimension with evidence citations
 3. Call `~/.claude/scripts/doi/score-assessment.sh foundational <9 scores>`
 4. Check gate for advanced: call `~/.claude/scripts/doi/score-assessment.sh advanced-gate <level> <p1> <p2> <p3>`
 5. If gate passes, score advanced sub-dimensions with evidence citations
 6. Perform tool validation — compare claimed vs. observed
 7. Write `assessments/foundational.md` (and `assessments/advanced.md` if eligible)
-8. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 7"`
+8. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 8"`
 
 ### Output Format
 `assessments/foundational.md`:
@@ -188,7 +189,7 @@ gate_failure: "[reason if not eligible]"
 - Every score MUST cite specific evidence — no vibes-based scoring
 - Tool validation is mandatory — if scores and data conflict, trust the data
 - Do NOT adjust prior phase outputs
-- Do NOT recommend interventions — that's Phase 8
+- Do NOT recommend interventions — that's Phase 9
 - Advanced assessment ONLY runs if gate passes — no exceptions
 - Pillar totals must match sub-dimension sums (script verifies this)
 - If the user pushes back on a low score, show the evidence — don't cave
