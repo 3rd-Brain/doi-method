@@ -85,7 +85,7 @@ Military decision-making cycle applied to task scoping:
    - Stage (1-4) with reasoning and confidence score (0-1)
    - Effort Level: Low / Medium / High / Continuous
    - 8 Core LLM Functions (which apply and why)
-   - KOODAR (6 dimensions — Observe/Orient = N/A for Stage 1-2)
+   - KOODAR (6 dimensions — Observe/Orient = N/A for Stage 1-3)
    - Workflow Steps — reference REAL API endpoints, integrations, and tool features from tool-capabilities.md
    - Outcome Alignment — populated from outcome-map.md (aligned/indirect/unaligned)
 6. Save each task as `tasks/{task-slug}.md` with full classification
