@@ -1,6 +1,6 @@
-# Digital Operations Institute Method
+# Turns Claude into your top AI Operations Consultant
 
-**Turns Claude into your top AI Operations Consultant.**
+**The Digital Operations Institute Method**
 
 Most AI readiness tools give you a questionnaire and a score. The DOI Method gives you a structured engagement — maturity scoring, role verification, outcome mapping, task classification, friction analysis, and a sequenced implementation roadmap. The same methodology behind 50+ client engagements at [3rd Brain](https://3rdbrain.co), packaged as a Claude Code plugin.
 
