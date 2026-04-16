@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 # doi-run
 
 ## 1. Overview
@@ -26,7 +43,7 @@ When invoked, announce at start:
 
 Before doing anything else, resolve the current session:
 
-1. Check `~/.claude/.doi-registry.md` for existing engagements.
+1. Check `$DOI_REGISTRY` for existing engagements.
 2. **If resuming:** Read `.doi-state.md` from the engagement folder, present a current progress summary, and pick up at the next incomplete phase.
 3. **If new:** No matching engagement found — proceed to Phase 0 (doi-intake).
 4. **If multiple engagements exist:** Show a numbered list of all engagements with their org name, current phase, and status. Ask which to continue.
@@ -127,7 +144,7 @@ State must be updated at two points: after every phase completion and after ever
 Call the state update script:
 
 ```bash
-~/.claude/scripts/doi/update-state.sh <engagement-folder> phase="Phase N" status=active
+$DOI_SCRIPTS/update-state.sh <engagement-folder> phase="Phase N" status=active
 ```
 
 The registry is updated automatically by the script.
@@ -182,6 +199,23 @@ overall_friction_tax: [weighted average]
 generated: [date]
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 # DOI Assessment Summary — [Organization]
 
 ## Organization Maturity: Level [N] ([Name])
@@ -204,11 +238,11 @@ generated: [date]
 
 When doi-run is invoked and the registry contains active or paused engagements:
 
-1. Read the registry at `~/.claude/.doi-registry.md`.
+1. Read the registry at `$DOI_REGISTRY`.
 2. If exactly 1 engagement exists: "Welcome back. Working on [Org], currently at [Phase]. Continue?"
 3. If more than 1 exists: show a numbered list, ask which to continue.
 4. Read `.doi-state.md` for the selected engagement.
-5. Call `~/.claude/scripts/doi/check-prerequisites.sh` for the next phase to verify all required inputs exist.
+5. Call `$DOI_SCRIPTS/check-prerequisites.sh` for the next phase to verify all required inputs exist.
 6. If prerequisites are met, pick up at the next phase.
 7. If prerequisites are missing, explain what is needed and resume from the current phase so the gap can be addressed.
 

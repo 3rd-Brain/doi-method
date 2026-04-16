@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 1 of the DOI Method. Evaluates the entire organization's digital operations maturity (Level 1-5) using a 30-item yes/no checklist across 5 categories. This is the starting point for understanding where the organization stands.
@@ -121,12 +138,12 @@ The 3 Cs are the *results* of leveling up. They arrive in sequence — you canno
 2. Walk user through 30 questions category by category. Use AskUserQuestion for each question — this keeps the flow structured and makes it clear when input is needed. If the user's answer is ambiguous (e.g., "kind of", "sometimes", "it depends"), use AskUserQuestion to clarify: "For scoring I need a yes or no — which is closer to your reality?"
 3. Track all responses
 4. Write responses to a temporary file for the scoring script
-5. Call `~/.claude/scripts/doi/score-assessment.sh initial <engagement-folder> <responses-file>`
+5. Call `$DOI_SCRIPTS/score-assessment.sh initial <engagement-folder> <responses-file>`
 6. Read the script output for computed scores, level, and cap information
 7. Write `assessments/maturity-assessment.md` with full analysis
 8. Include per-category breakdown and plain-language explanation
 9. If capped, explain clearly WHAT is blocking progress and WHY it matters
-10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 1" maturity_level=<level>`
+10. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 1" maturity_level=<level>`
 
 ### Output Format
 
@@ -139,6 +156,23 @@ level_name: [name]
 capped: [true/false]
 cap_reason: "[reason if capped]"
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Initial Assessment — [Organization Name]
 

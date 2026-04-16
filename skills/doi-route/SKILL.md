@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 Phase 7 of the DOI Method. Diagnostician — classifies what's causing friction and routes to the right intervention type. This is where DOI's People → Process → Tools philosophy meets SONAR-style bottleneck analysis.
 
@@ -21,7 +38,7 @@ Phase 7 of the DOI Method. Diagnostician — classifies what's causing friction 
 Standard DOI session resolution.
 
 ### Prerequisites
-Call `~/.claude/scripts/doi/check-prerequisites.sh 7 <engagement-folder> <dept-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 7 <engagement-folder> <dept-slug>`
 Required: All role-summary.md files complete for the department.
 Also read all `outcome-map.md` files for the department to tag bottlenecks with blocked outcomes.
 
@@ -93,7 +110,7 @@ Within each bottleneck type, the automation stage determines what kind of interv
    - Stage 1-2 interventions: can begin immediately
    - Stage 3-4 interventions: BLOCKED until maturity reaches Level 3
 9. Write `gap-analysis.md`
-10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 7"`
+10. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 7"`
 
 ### Output Format
 `departments/{dept-slug}/gap-analysis.md`:
@@ -107,6 +124,23 @@ bottleneck_summary:
   process: [count]
   tools: [count]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Bottleneck Analysis — [Department Name]
 

@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 2 of the DOI Method. Organizer — collects organizational structure and source materials. Sets up the workspace for department and role assessment. This phase has NO critic review (it's data collection, not analysis).
@@ -25,7 +42,7 @@ Standard DOI session resolution — check registry, confirm engagement.
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 2 <engagement-folder>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 2 <engagement-folder>`
 Required: `assessments/maturity-assessment.md` must exist.
 
 ### Process
@@ -41,7 +58,7 @@ Required: `assessments/maturity-assessment.md` must exist.
 4. Use AskUserQuestion: "What results does [department] need to deliver to the business? Not the tasks or reports — the actual results that matter if they stopped happening."
 5. For each result identified, use AskUserQuestion: "How would someone know that result is being achieved well?"
 6. Create `departments/{dept-slug}/department.md`
-7. Call `~/.claude/scripts/doi/init-workspace.sh <folder> <dept-slug>`
+7. Call `$DOI_SCRIPTS/init-workspace.sh <folder> <dept-slug>`
 8. Use AskUserQuestion: "Which department would you like to assess first?"
 9. Update `.doi-state.md` with departments_remaining and current_department
 
@@ -50,7 +67,7 @@ Required: `assessments/maturity-assessment.md` must exist.
 1. For the selected department, use AskUserQuestion: "What roles exist in [department]?"
 2. For each role:
    - Create `departments/{dept-slug}/roles/{role-slug}/`
-   - Call `~/.claude/scripts/doi/init-workspace.sh <folder> <dept-slug> <role-slug>`
+   - Call `$DOI_SCRIPTS/init-workspace.sh <folder> <dept-slug> <role-slug>`
 3. Update `.doi-state.md` with roles_remaining
 
 #### Materials Gathering

@@ -28,7 +28,7 @@ if [ -z "$ENGAGEMENT_DIR" ]; then
 fi
 
 STATE_FILE="$ENGAGEMENT_DIR/.doi-state.md"
-REGISTRY="$HOME/.claude/.doi-registry.md"
+REGISTRY="${DOI_REGISTRY:-$HOME/.claude/.doi-registry.md}"
 TODAY=$(date +%Y-%m-%d)
 
 if [ ! -f "$STATE_FILE" ]; then

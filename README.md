@@ -18,10 +18,6 @@ Designed for consultants running AI readiness engagements with clients. Also wor
 
 ---
 
-<!-- GRAPHIC: screenshot or short GIF of an active DOI engagement — phase prompt + structured output -->
-
----
-
 ## What the Client Walks Away With
 
 | Output | Description |
@@ -37,13 +33,39 @@ Designed for consultants running AI readiness engagements with clients. Also wor
 
 ---
 
-## Quick Start
+## Installation
+
+### Claude Cowork (recommended)
+
+Search for **DOI Method** in the Cowork plugin marketplace, or install directly:
 
 ```bash
-git clone https://github.com/3rd-Brain/doi-method.git
+git clone https://github.com/gentoftech/doi-method.git
 cd doi-method
 ./install-doi.sh
 ```
+
+This installs as a Cowork plugin at `~/.claude/plugins/doi-method/`.
+
+### Legacy install
+
+```bash
+git clone https://github.com/gentoftech/doi-method.git
+cd doi-method
+./install-doi.sh --legacy
+```
+
+This copies skills, agents, and scripts to `~/.claude/skills/`, `~/.claude/agents/`, and `~/.claude/scripts/doi/`.
+
+### Requirements
+
+- [Claude Code](https://claude.ai/code) — Anthropic's CLI
+- Claude Max or Team subscription
+- macOS, Linux, or Windows (via Git Bash / WSL)
+
+---
+
+## Quick Start
 
 Open Claude Code and run:
 
@@ -53,19 +75,11 @@ Open Claude Code and run:
 
 Claude guides you through every phase. Your client answers the questions.
 
-### Requirements
-
-- [Claude Code](https://claude.ai/code) — Anthropic's CLI
-- Claude Max or Team subscription
-- macOS or Linux (Windows via WSL)
-
 ---
 
 ## How It Works
 
 DOI is a **skill system for Claude Code** — 10 phase-specific skills, an isolated critic agent, and 6 computation scripts, all wired together by a single orchestrator.
-
-<!-- GRAPHIC: phase flow diagram (0 → 1 → 2 → ... → 9, with phase names) -->
 
 | Phase | Command | What Happens |
 |---|---|---|
@@ -108,6 +122,12 @@ DOI Method is designed, built, and maintained by **[3rd Brain](https://3rdbrain.
 
 ## Uninstall
 
+**Cowork plugin:**
+```bash
+rm -rf ~/.claude/plugins/doi-method
+```
+
+**Legacy install:**
 ```bash
 rm -rf ~/.claude/skills/doi-*
 rm -rf ~/.claude/agents/doi-review

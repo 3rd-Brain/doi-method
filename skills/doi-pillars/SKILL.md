@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 Phase 8 of the DOI Method. Assessor — scores department maturity pillars grounded in REAL DATA from prior phases. Unlike traditional self-assessments, every score must cite specific evidence. If the data contradicts what the user might expect, score based on the data and explain why.
 
@@ -21,7 +38,7 @@ Phase 8 of the DOI Method. Assessor — scores department maturity pillars groun
 Standard DOI session resolution.
 
 ### Prerequisites
-Call `~/.claude/scripts/doi/check-prerequisites.sh 8 <engagement-folder> <dept-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 8 <engagement-folder> <dept-slug>`
 Required: All role-summary.md files + gap-analysis.md must exist.
 
 ### Foundational Assessment — 3 Pillars (9 sub-dimensions, 1-5 each)
@@ -78,7 +95,7 @@ Score ranges align with this:
 ### Advanced Gate Check
 
 Before running advanced assessment:
-- Call `~/.claude/scripts/doi/score-assessment.sh advanced-gate <level> <pillar1> <pillar2> <pillar3>`
+- Call `$DOI_SCRIPTS/score-assessment.sh advanced-gate <level> <pillar1> <pillar2> <pillar3>`
 - Foundational level MUST = 3
 - EVERY pillar total MUST >= 7/15
 - If gate fails → document why, do NOT proceed to advanced
@@ -127,12 +144,12 @@ A sub-dimension score of 3 = the pillar is at Level 3 behavior. Score 2 = Level 
 ### Process
 1. Read ALL prior phase outputs: role-summary.md files, 3c-report.md, gap-analysis.md, maturity-assessment.md, and all `outcome-map.md` files
 2. Score each foundational sub-dimension with evidence citations
-3. Call `~/.claude/scripts/doi/score-assessment.sh foundational <9 scores>`
-4. Check gate for advanced: call `~/.claude/scripts/doi/score-assessment.sh advanced-gate <level> <p1> <p2> <p3>`
+3. Call `$DOI_SCRIPTS/score-assessment.sh foundational <9 scores>`
+4. Check gate for advanced: call `$DOI_SCRIPTS/score-assessment.sh advanced-gate <level> <p1> <p2> <p3>`
 5. If gate passes, score advanced sub-dimensions with evidence citations
 6. Perform tool validation — compare claimed vs. observed
 7. Write `assessments/foundational.md` (and `assessments/advanced.md` if eligible)
-8. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 8"`
+8. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 8"`
 
 ### Output Format
 `assessments/foundational.md`:
@@ -149,6 +166,23 @@ pillar_totals:
 advanced_eligible: [true/false]
 gate_failure: "[reason if not eligible]"
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Foundational Assessment — [Department Name]
 

@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-08
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 4 of the DOI Method. For each verified role, captures what results the role needs to produce, whether those results are defined and measured, and which verified tasks serve which results. This is the "does this work matter?" lens for the rest of the engagement.
@@ -25,11 +42,11 @@ The existence of defined outcomes is the finding. Whether a role can articulate 
 
 ### Session Resolution
 
-Standard DOI session resolution (check `~/.claude/.doi-registry.md` for active engagements, confirm engagement context — see `doi-intake/SKILL.md` Session Resolution section for the full pattern).
+Standard DOI session resolution (check `$DOI_REGISTRY` for active engagements, confirm engagement context — see `doi-intake/SKILL.md` Session Resolution section for the full pattern).
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 4 <engagement-folder> <dept-slug> <role-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 4 <engagement-folder> <dept-slug> <role-slug>`
 
 Required: `roles/{role-slug}/verified-role.md` must exist (Phase 3 complete for this role).
 
@@ -85,7 +102,7 @@ Compare department outcomes against role outcomes and task coverage. Flag:
 #### Step 5: Write output and update state.
 
 Write `roles/{role-slug}/outcome-map.md`.
-Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 4"`
+Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 4"`
 
 ### Output Format
 
@@ -104,6 +121,23 @@ tasks_unaligned: [count]
 outcome_gaps: [count]
 mapped_date: [YYYY-MM-DD]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Outcome Map — [Role Name]
 

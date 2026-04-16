@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 6 of the DOI Method. Measurer — quantifies how much pain each task causes using DOI's **Three C's framework** (Consistency, Clarity, Capacity), then rolls up to role and department level. The Friction Tax is DOI's signature metric: "X% of your capacity is friction, not output." This phase makes invisible operational drag visible and measurable.
@@ -31,7 +48,7 @@ Standard DOI session resolution.
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 6 <engagement-folder> <dept-slug> <role-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 6 <engagement-folder> <dept-slug> <role-slug>`
 Required: Task files must exist in `roles/{role-slug}/tasks/`
 Also read `outcome-map.md` for outcome alignment context when scoring Capacity.
 
@@ -97,9 +114,9 @@ Used to weight friction by how often the pain occurs:
    - **Capacity:** How much time does this consume relative to value? Use time estimates from verification. Does it block higher-value work? Reference outcome alignment from outcome-map.md when assessing value. An unaligned task consuming significant time is a capacity problem regardless of friction score — note this in the rationale. Example: "Capacity: 4/5 — consumes ~5 hrs/week and is not mapped to any defined business result (outcome_alignment: unaligned), making the time investment disproportionate to demonstrable value."
 4. For each score, provide a specific rationale (not just a number)
 5. Append friction section to each `tasks/{task-slug}.md`
-6. Call `~/.claude/scripts/doi/calculate-friction.sh role <folder> <dept-slug> <role-slug>`
-7. After ALL roles in the department are friction-scored, call `~/.claude/scripts/doi/calculate-friction.sh department <folder> <dept-slug>`
-8. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 6"`
+6. Call `$DOI_SCRIPTS/calculate-friction.sh role <folder> <dept-slug> <role-slug>`
+7. After ALL roles in the department are friction-scored, call `$DOI_SCRIPTS/calculate-friction.sh department <folder> <dept-slug>`
+8. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 6"`
 
 ### Per-Task Friction Output
 

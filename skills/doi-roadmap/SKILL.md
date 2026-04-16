@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 Phase 9 of the DOI Method. Planner — the final deliverable. Synthesizes everything from prior phases into an actionable, sequenced implementation roadmap. Prioritizes interventions, sorts into tiers, sequences within tiers, and projects impact.
 
@@ -21,7 +38,7 @@ Phase 9 of the DOI Method. Planner — the final deliverable. Synthesizes everyt
 Standard DOI session resolution.
 
 ### Prerequisites
-Call `~/.claude/scripts/doi/check-prerequisites.sh 9 <engagement-folder> <dept-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 9 <engagement-folder> <dept-slug>`
 Required: foundational.md + 3c-report.md + gap-analysis.md
 
 ### Required Inputs
@@ -103,7 +120,7 @@ Within each tier, respect:
 9. Write Foundation Progress Tracker (hard cap gates with current/projected status)
 10. Write "What Not to Do Yet" section
 11. Write `roadmap.md` in the department directory
-12. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 9"`
+12. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 9"`
 
 ### Output Format
 `roadmap.md`:
@@ -118,6 +135,23 @@ projected_friction_after_tier1: [N]%
 projected_level_after_tier2: [N]
 generated: [YYYY-MM-DD]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Implementation Roadmap — [Department Name]
 

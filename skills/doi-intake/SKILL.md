@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 0 of the DOI Method. Information collector — gathers organization context to ground all future analysis. Cannot assess, score, or recommend anything.
@@ -22,7 +39,7 @@ Phase 0 of the DOI Method. Information collector — gathers organization contex
 ### Session Resolution
 
 Standard DOI session resolution:
-1. Check `~/.claude/.doi-registry.md`
+1. Check `$DOI_REGISTRY`
 2. If 0 entries → new engagement, proceed with intake
 3. If entries exist → this is handled by doi-run; if invoked standalone, confirm new engagement
 
@@ -35,10 +52,10 @@ Standard DOI session resolution:
    - If the user lists multiple, follow up with AskUserQuestion: "Those are all valid, but we need to rank everything against ONE primary goal. Which of those matters most right now?"
 5. Use AskUserQuestion: "What prompted this assessment? (pain points, growth plans, curiosity, mandate from leadership — anything that triggered it)"
 6. Confirm all details with the user before saving
-7. Create engagement folder and call `~/.claude/scripts/doi/init-workspace.sh <folder>`
+7. Create engagement folder and call `$DOI_SCRIPTS/init-workspace.sh <folder>`
 8. Write `company-profile.md` in the engagement root
 9. Create `.doi-state.md` with initial state (phase: Phase 0, status: active)
-10. Create or update `~/.claude/.doi-registry.md` with new entry
+10. Create or update `$DOI_REGISTRY` with new entry
 
 ### Output Format
 

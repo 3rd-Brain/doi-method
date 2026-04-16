@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 5 of the DOI Method. Analyst — extracts tasks from verified role profiles, classifies automation potential, and decomposes into implementable units. This is the technical core of DOI.
@@ -27,7 +44,7 @@ Standard DOI session resolution.
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 5 <engagement-folder> <dept-slug> <role-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 5 <engagement-folder> <dept-slug> <role-slug>`
 Required: `roles/{role-slug}/verified-role.md` must exist.
 Also read: `roles/{role-slug}/outcome-map.md` for outcome alignment data from Phase 4.
 
@@ -98,8 +115,8 @@ Military decision-making cycle applied to task scoping:
    - **Skip for unaligned tasks** (outcome_alignment = unaligned from outcome-map.md). No point designing AI architecture for work that may not serve a defined result.
    - Save to `microservices/{task-slug}-microservices.md`
 8. Present the extracted task list to the user. Use AskUserQuestion: "Here are the [N] tasks I extracted for [role name]. Is anything missing or wrong?" — this is their last chance to add tasks before classification begins.
-9. Call `~/.claude/scripts/doi/aggregate-snapshot.sh <folder> <dept-slug> <role-slug>`
-10. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 5"`
+9. Call `$DOI_SCRIPTS/aggregate-snapshot.sh <folder> <dept-slug> <role-slug>`
+10. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 5"`
 
 ### Tool/API Research Step (Detail for Step 2)
 
@@ -135,6 +152,23 @@ role: [Role Name]
 tools_researched: [count]
 researched_date: [YYYY-MM-DD]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Integration Research — [Role Name]
 
@@ -185,6 +219,23 @@ effort: [low/medium/high/continuous]
 confidence: [0.0-1.0]
 outcome_alignment: [aligned/indirect/unaligned]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # [Task Name]
 
@@ -237,6 +288,23 @@ task: [parent task name]
 task_stage: [2-4]
 microservice_count: [N]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Microservices — [Task Name]
 

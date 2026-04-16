@@ -10,6 +10,23 @@ metadata:
   updated: 2026-04-07
 ---
 
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
+
 ### Overview
 
 Phase 3 of the DOI Method. Investigator — probes the gap between what materials say a role does and what the person actually does day-to-day. This is what separates DOI from blind self-assessment. People describe their roles aspirationally, not operationally. A marketing manager says "I develop campaign strategy" when they actually spend 3 hours a day copy-pasting data between spreadsheets.
@@ -29,7 +46,7 @@ Standard DOI session resolution — check registry, confirm engagement, identify
 
 ### Prerequisites
 
-Call `~/.claude/scripts/doi/check-prerequisites.sh 3 <engagement-folder> <dept-slug> <role-slug>`
+Call `$DOI_SCRIPTS/check-prerequisites.sh 3 <engagement-folder> <dept-slug> <role-slug>`
 Required: `roles/{role-slug}/materials.md` must exist.
 
 ### Process
@@ -95,7 +112,7 @@ Now that you have system data, your questions are sharper. You're not asking "wh
    - Cross-reference with system data: "Materials say A/B testing on all campaigns, but I see no test variants in HubSpot"
 7. Build time allocation table from user estimates AND system data
 8. Write `verification.md`
-9. Call `~/.claude/scripts/doi/update-state.sh <folder> phase="Phase 3"`
+9. Call `$DOI_SCRIPTS/update-state.sh <folder> phase="Phase 3"`
 
 #### Step 3: When System Access Is Limited
 
@@ -137,6 +154,23 @@ discrepancies_found: [count]
 undocumented_tasks: [count]
 aspirational_items: [count]
 ---
+
+
+### Environment Resolution
+
+Before running any DOI script, resolve the plugin paths once per session:
+
+```bash
+# Resolve DOI plugin directory (Cowork install or legacy)
+if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+elif [ -d "$HOME/.claude/scripts/doi" ]; then
+  export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+else
+  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+fi
+export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+```
 
 # Verified Role Profile — [Role Name]
 
