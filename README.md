@@ -1,4 +1,4 @@
-# DOI Method
+# Digital Operations Institute Method
 
 **Turns Claude into your top AI Operations Consultant.**
 
