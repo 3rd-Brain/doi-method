@@ -1,7 +1,7 @@
 ---
 name: doi-roles
 description: "Use when analyzing a verified role — extracts tasks by frequency, classifies each into the 4-stage AI automation framework, maps LLM functions and KOODAR dimensions, and decomposes stage 2-4 tasks into microservices. Cannot score friction or recommend implementation order."
-license: proprietary
+license: GPL-3.0
 metadata:
   version: 1.0.0
   author: 3rd Brain DigiOps

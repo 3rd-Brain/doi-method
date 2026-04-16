@@ -165,4 +165,4 @@ DOI Method is designed, built, and maintained by [**3rd Brain**](https://3rdbrai
 
 ---
 
-*Proprietary. Copyright 2026 3rd Brain DigiOps. All rights reserved.*
+*Licensed under GPL-3.0. Copyright 2026 3rd Brain DigiOps. All rights reserved.*

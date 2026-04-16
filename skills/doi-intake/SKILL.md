@@ -1,7 +1,7 @@
 ---
 name: doi-intake
 description: "Use when starting a new DOI engagement. Gathers organization context — name, industry, size, primary goal, and assessment trigger. Creates the engagement workspace and registers it. Cannot assess, score, or recommend."
-license: proprietary
+license: GPL-3.0
 metadata:
   version: 1.0.0
   author: 3rd Brain DigiOps

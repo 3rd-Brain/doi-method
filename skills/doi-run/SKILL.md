@@ -1,7 +1,7 @@
 ---
 name: doi-run
 description: "Use when conducting a full DOI engagement — walks an organization through all assessment phases from intake through implementation roadmap. Orchestrates doi-intake, doi-assess, doi-setup, doi-verify, doi-outcomes, doi-roles, doi-friction, doi-route, doi-pillars, and doi-roadmap with critic reviews and human gates between each phase."
-license: proprietary
+license: GPL-3.0
 metadata:
   version: 1.0.0
   author: 3rd Brain DigiOps

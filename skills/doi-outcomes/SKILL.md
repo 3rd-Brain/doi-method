@@ -1,7 +1,7 @@
 ---
 name: doi-outcomes
 description: "Use when mapping role-level outcomes after verification. Captures solution-agnostic results, success signals, measurement status, and task-to-outcome alignment. Sits between Verify (Phase 3) and Roles (Phase 5) in the per-role loop. Cannot classify automation stages, score friction, or recommend solutions."
-license: proprietary
+license: GPL-3.0
 metadata:
   version: 1.0.0
   author: 3rd Brain DigiOps

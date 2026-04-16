@@ -1,7 +1,7 @@
 ---
 name: doi-review
 description: "Isolated critic agent for DOI Method. Reviews phase outputs for methodology violations, client blind spots, scoring inconsistencies, and missing data. Spawned fresh with no conversation context — receives only phase output files."
-license: proprietary
+license: GPL-3.0
 metadata:
   version: 1.0.0
   author: 3rd Brain DigiOps

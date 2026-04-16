@@ -1,7 +1,7 @@
 ---
 name: doi-friction
 description: "Use when scoring friction on classified tasks using the Three C's framework (Consistency, Clarity, Capacity). Evaluates each task across 3 dimensions, calculates per-task friction scores, and rolls up to Role Friction Tax and Department Friction Tax. Cannot recommend or prioritize."
-license: proprietary
+license: GPL-3.0
 metadata:
   version: 1.1.0
   author: 3rd Brain DigiOps
