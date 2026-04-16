@@ -25,24 +25,6 @@ This is not a report someone reads and shelves. Every output feeds the next phas
 
 ---
 
-## Quick Start
-
-```bash
-git clone https://github.com/3rd-Brain/doi-method.git
-cd doi-method
-./install-doi.sh
-```
-
-Open Claude Code and type:
-
-```
-/doi-run
-```
-
-Claude picks up the methodology and walks you through every phase.
-
----
-
 ## Installation
 
 ### Claude Cowork (recommended)
@@ -63,15 +45,27 @@ Installs as a self-contained plugin at `~/.claude/plugins/doi-method/`.
 git clone https://github.com/3rd-Brain/doi-method.git
 cd doi-method
 ./install-doi.sh --legacy
+
 ```
 
 Copies skills, agents, and scripts to your `~/.claude/` directories.
+---
 
-### Requirements
+## Quick Start
 
-- [Claude Code](https://claude.ai/code) or Claude Cowork
-- Claude Max or Team subscription
-- macOS, Linux, or Windows (Git Bash / WSL)
+```bash
+git clone https://github.com/3rd-Brain/doi-method.git
+cd doi-method
+./install-doi.sh
+```
+
+Open Claude Code and type:
+
+```
+/doi-run
+```
+
+Claude picks up the methodology and walks you through every phase.
 
 ---
 
