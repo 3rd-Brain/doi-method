@@ -1,6 +1,7 @@
 ---
 name: doi-assess
 description: "Use when conducting the 30-question digital operations maturity assessment. Walks the user through 5 categories of yes/no questions, applies hard cap gate rules, and determines maturity level 1-5. Cannot recommend or prescribe solutions."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0

@@ -1,6 +1,7 @@
 ---
 name: doi-route
 description: "Use when classifying what causes friction in a department and routing to intervention types. Categorizes bottlenecks as People, Process, or Tools, then routes each by automation stage to determine the right intervention. Cannot build roadmaps or prescribe order."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0

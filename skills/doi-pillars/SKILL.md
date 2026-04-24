@@ -1,6 +1,7 @@
 ---
 name: doi-pillars
 description: "Use when scoring a department's foundational pillars (Talent Strategy, Workflow Optimization, Digital Architecture) and advanced pillars (Knowledge Management, AI Automation). Every score must cite evidence from prior phases. Includes gate check for advanced assessment eligibility."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0

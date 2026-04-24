@@ -1,6 +1,7 @@
 ---
 name: doi-setup
 description: "Use when setting up departments and roles for assessment. Identifies departments, gathers tools and team info, creates role directories, and collects source materials (job descriptions, SOPs, docs). Cannot analyze or score anything."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0

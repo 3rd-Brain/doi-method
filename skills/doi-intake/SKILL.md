@@ -1,6 +1,7 @@
 ---
 name: doi-intake
 description: "Use when starting a new DOI engagement. Runs a consulting-style interview that builds a rich context folder — not a 5-field form. Gathers organization basics, current state, history with automation, tech stack, goals, constraints, and stakeholders. Creates the engagement workspace, registers it, and writes the context folder that every downstream phase reads from. Cannot assess, score, or recommend."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 2.0.0
