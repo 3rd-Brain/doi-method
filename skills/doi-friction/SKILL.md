@@ -14,18 +14,23 @@ metadata:
 
 ### Environment Resolution
 
-Before running any DOI script, resolve the plugin paths once per session:
+Before running any DOI script, resolve the shared DOI script directory and registry path once per session:
 
 ```bash
-# Resolve DOI plugin directory (Cowork install or legacy)
-if [ -d "$HOME/.claude/plugins/doi-method/scripts" ]; then
-  export DOI_SCRIPTS="$HOME/.claude/plugins/doi-method/scripts"
+if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ] && [ -d "${CLAUDE_PLUGIN_ROOT}/scripts" ]; then
+  export DOI_SCRIPTS="${CLAUDE_PLUGIN_ROOT}/scripts"
+  export DOI_REGISTRY="${DOI_REGISTRY:-${CLAUDE_PLUGIN_DATA:-$PWD}/.doi-registry.md}"
+elif [ -n "${CLAUDE_SKILL_DIR:-}" ] && [ -d "${CLAUDE_SKILL_DIR}/scripts/doi" ]; then
+  export DOI_SCRIPTS="${CLAUDE_SKILL_DIR}/scripts/doi"
+  export DOI_REGISTRY="${DOI_REGISTRY:-$PWD/.doi-registry.md}"
 elif [ -d "$HOME/.claude/scripts/doi" ]; then
   export DOI_SCRIPTS="$HOME/.claude/scripts/doi"
+  export DOI_REGISTRY="${DOI_REGISTRY:-$HOME/.claude/.doi-registry.md}"
 else
-  echo "ERROR: DOI Method scripts not found. Run the installer or install via Cowork."; exit 1
+  echo "ERROR: DOI Method scripts not found. Install the plugin, use ./install-doi.sh --legacy, or rebuild the Cowork .skill packages." >&2
+  exit 1
 fi
-export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
+mkdir -p "$(dirname "$DOI_REGISTRY")"
 ```
 
 ### Overview
