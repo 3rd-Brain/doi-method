@@ -1,6 +1,7 @@
 ---
 name: doi-run
 description: "Use when starting or resuming a DOI engagement. Acts as the AI operations consultant front-door — detects new vs. resume, runs a consulting-style intake (via doi-intake), then interviews the operator to route them to the right path: full engagement (doi-engage), a standalone phase (doi-assess, doi-pillars), or a role-level deep dive. Does not execute phases itself; it dispatches."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 2.0.0

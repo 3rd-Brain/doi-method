@@ -1,6 +1,7 @@
 ---
 name: doi-roadmap
 description: "Use when building the final implementation roadmap for a department. Synthesizes all prior phases into a tiered, sequenced plan with projected friction reduction and maturity progression. This is the final deliverable of a DOI engagement."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0

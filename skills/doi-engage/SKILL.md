@@ -1,6 +1,7 @@
 ---
 name: doi-engage
 description: "Use when running the full DOI pipeline end-to-end after intake + routing. Chains doi-assess, doi-setup, doi-verify, doi-outcomes, doi-roles, doi-friction, doi-route, doi-pillars, and doi-roadmap with critic reviews, human gates, and state management. Invoked by doi-run for full-engagement paths, or directly if the operator wants to skip the consultant interview."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0

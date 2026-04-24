@@ -1,6 +1,7 @@
 ---
 name: doi-verify
 description: "Use when verifying a role's documented responsibilities against their actual day-to-day work. Probes for discrepancies, discovers undocumented tasks, flags aspirational items, and captures time estimates. Cannot classify, score, or recommend."
+user-invocable: true
 license: GPL-3.0
 metadata:
   version: 1.0.0
