@@ -1,8 +1,25 @@
 {
-  "title": "DOI Method",
-  "tagline": "Assess any organization's AI/automation readiness with a structured, multi-phase methodology",
-  "category": "operations",
-  "tags": ["assessment", "automation", "ai-readiness", "digital-operations", "maturity"],
-  "repository": "https://github.com/3rd-Brain/AI-Operations-Consultant",
-  "homepage": "https://digitaloperationsinstitute.com"
+  "name": "doi-method",
+  "description": "Digital Operations Institute — AI/automation readiness assessment methodology for Claude Code",
+  "owner": {
+    "name": "3rd Brain DigiOps",
+    "url": "https://digitaloperationsinstitute.com"
+  },
+  "plugins": [
+    {
+      "name": "doi-method",
+      "description": "Digital Operations Institute — AI/automation readiness assessment methodology for Claude Code",
+      "version": "2.0.0",
+      "source": "./",
+      "category": "operations",
+      "tags": ["assessment", "automation", "ai-readiness", "digital-operations", "maturity"],
+      "homepage": "https://digitaloperationsinstitute.com",
+      "repository": "https://github.com/3rd-Brain/AI-Operations-Consultant",
+      "license": "GPL-3.0",
+      "author": {
+        "name": "3rd Brain DigiOps",
+        "url": "https://digitaloperationsinstitute.com"
+      }
+    }
+  ]
 }
