@@ -1,56 +1,49 @@
-# Turn Claude Into A Top 1% AI Operations Consultant
+# Turn Claude Into An AI Operations Consultant
 
 **The Digital Operations Institute Method**
 
-Most AI readiness tools give you a questionnaire and a score. The DOI Method gives you a consultant — conversational intake, role verification, outcome mapping, task classification, friction analysis, and a sequenced implementation roadmap. The same methodology behind 50+ client engagements at [3rd Brain](https://3rdbrain.co), packaged for Claude Code and Cowork.
+Most AI readiness tools give you a questionnaire and a score. DOI gives you a consultant: conversational intake, role verification, outcome mapping, task classification, friction analysis, and a sequenced implementation roadmap.
 
-The important distinction is **install surface**:
-- **Standalone Claude Code skills** use bare commands like `/doi-run`
-- **Plugin installs** use plugin-scoped commands like `/doi-method:doi-run`
-- **Cowork skill imports** use bare commands like `/doi-run`
+Built from 50+ client engagements at [3rd Brain](https://3rdbrain.co), DOI is packaged for **Claude Code** and **Claude Cowork**.
+
+## The Official Experience
+
+DOI is now **plugin-first**.
+
+That means the official install and usage story is:
+- Install DOI as a plugin
+- Run one command everywhere: `/doi-method:doi-run`
+
+If you uploaded DOI as a plugin and saw `Unknown command: /doi-run`, nothing was wrong with the methodology itself. Plugin installs are namespaced, so the correct command is:
+
+```text
+/doi-method:doi-run
+```
 
 ---
 
-## What You Walk Away With
+## What You Get
 
 | Deliverable | What It Is |
 |---|---|
-| **Maturity Score** | Level 1-5 readiness rating with hard cap gate logic — no inflated scores |
+| **Maturity Score** | Level 1-5 readiness rating with hard cap gate logic |
 | **Role Reality Check** | Verified gap between documented roles and actual day-to-day work |
 | **Outcome Map** | Solution-agnostic results per role, tagged to every task |
 | **Task Classification** | Every task rated on a 4-stage AI automation scale |
-| **Friction Tax** | % of capacity lost to friction — by task, role, and department |
-| **Bottleneck Routing** | People / Process / Tools classification for every high-friction task |
+| **Friction Tax** | % of capacity lost to friction by task, role, and department |
+| **Bottleneck Routing** | People / Process / Tools diagnosis for high-friction work |
 | **Pillar Assessment** | Evidence-backed foundational + advanced readiness scores |
 | **Implementation Roadmap** | Tiered, sequenced plan with projected friction reduction |
 
-This is not a report someone reads and shelves. Every output feeds the next phase, and the final roadmap is sequenced by impact — what to fix first, what to automate, and what to leave alone.
-
-You do not have to run the whole thing. `doi-run` is a consultant — after intake it asks what you want out of the engagement. Just a maturity score? A deep dive on one broken role? A pillars snapshot? Full 10-phase engagement? It routes accordingly.
+This is not a report someone reads and shelves. Every output feeds the next phase.
 
 ---
 
-## Installation
+## Install
 
-### Claude Code: standalone skills (bare `/doi-run`)
+### Claude Code
 
-This is the easiest path if you want the command exactly as `/doi-run`.
-
-```bash
-git clone https://github.com/3rd-Brain/AI-Operations-Consultant.git
-cd AI-Operations-Consultant
-./install-doi.sh
-```
-
-Then run:
-
-```
-/doi-run
-```
-
-### Claude Code: plugin install (namespaced `/doi-method:doi-run`)
-
-Plugin installs are the best fit if you want the DOI Method packaged as a Claude plugin with shared skills and the bundled critic agent.
+#### Marketplace install
 
 ```text
 /plugin marketplace add 3rd-Brain/AI-Operations-Consultant
@@ -59,49 +52,11 @@ Plugin installs are the best fit if you want the DOI Method packaged as a Claude
 
 Then run:
 
-```
+```text
 /doi-method:doi-run
 ```
 
-If you are installing from a local clone as a plugin instead of standalone skills:
-
-```bash
-./install-doi.sh --plugin
-```
-
-### Cowork: full plugin upload (recommended for the full DOI flow)
-
-Cowork supports custom plugins uploaded from file. If you upload the repo as a Cowork plugin, the command is namespaced:
-
-```
-/doi-method:doi-run
-```
-
-This path includes the bundled reviewer agent and shared scripts, so it is the recommended Cowork install for the full end-to-end engagement.
-
-### Cowork: direct skill imports (bare `/doi-run`)
-
-If you want bare Cowork skills in the slash menu, import the `.skill` bundles from `dist/cowork/`:
-
-1. Download the `.skill` files from `dist/cowork/`
-2. In Cowork, go to **Skills → Create skill → Import from `.skill` file**
-3. Upload each file
-
-Then run:
-
-```
-/doi-run
-```
-
-Start with `doi-run.skill` at minimum. Install the rest of the DOI skills for the downstream flow.
-
-Full install notes are in [INSTALL.md](INSTALL.md).
-
----
-
-## Quick Start
-
-### Standalone Claude Code
+#### Local clone install
 
 ```bash
 git clone https://github.com/3rd-Brain/AI-Operations-Consultant.git
@@ -109,76 +64,104 @@ cd AI-Operations-Consultant
 ./install-doi.sh
 ```
 
-Open Claude Code and type:
+`./install-doi.sh` now defaults to the **plugin install** path.
 
-```
-/doi-run
-```
+Then run:
 
-### Plugin install
-
-Open Claude Code or Cowork and type:
-
-```
+```text
 /doi-method:doi-run
 ```
 
-The consultant interviews you (7-section consulting-style intake), then asks what you're trying to get out of the engagement and routes you to the right path. Pause or stop any time — state is saved.
+### Claude Cowork
+
+Upload the repo as a custom plugin, then run:
+
+```text
+/doi-method:doi-run
+```
+
+This is the recommended Cowork path because it includes:
+- the shared DOI scripts
+- the reviewer agent used in the full pipeline
+- the exact same entrypoint and behavior as plugin installs in Claude Code
 
 ---
 
-## How to Use It
+## Quick Start
 
-**Start a new engagement:** invoke the consultant entrypoint for your install surface:
-- Standalone skills: `/doi-run`
-- Plugin installs: `/doi-method:doi-run`
+Open Claude and type:
 
-The consultant walks you through a consulting-style intake — organization, current state, history with automation, tech stack, goals, constraints, stakeholders. Then it asks what you want:
+```text
+/doi-method:doi-run
+```
 
-1. **Full engagement** — all 10 phases across every department and role (heaviest lift, most complete picture)
-2. **Maturity score only** — 30-question assessment → Level 1-5 reading in ~20 minutes
-3. **Single-role deep dive** — pick one role, run verification, outcome mapping, task classification, and friction scoring
-4. **Pillars snapshot** — evidence-backed scoring against foundational + advanced readiness pillars
-5. **"You tell me"** — describe your situation, the consultant picks the path
+The consultant will:
+1. Detect whether this is a new engagement or a resume
+2. Run a consulting-style intake
+3. Ask what you want out of the engagement
+4. Route you to the right path
 
-Whatever you pick, the intake you did up front populates the context folder that every downstream phase reads from — so you only do the interview once.
+You do **not** have to run the full pipeline every time.
 
-**Resume an engagement:** invoke the same consultant command again. It finds the existing engagement, shows you where you left off, and asks what you want to do next.
+After intake, DOI can route you to:
+- **Full engagement**: all phases across departments and roles
+- **Maturity score only**: 30-question assessment
+- **Single-role deep dive**: verification, outcomes, tasks, friction
+- **Pillars snapshot**: evidence-backed readiness scoring
+- **Consultative routing**: describe the situation and let DOI choose the path
 
-**Skip the consultant (power-user shortcut):** invoke the matching direct phase command for your install surface. Examples:
-- Standalone: `/doi-engage`
-- Plugin: `/doi-method:doi-engage`
+---
 
-**Pause or stop:** Say "pause" or "stop" at any point. State is saved. Come back tomorrow, next week — the engagement holds.
+## How To Use It
 
-**Human gates:** After key phases, Claude presents its work and waits for your approval before moving on. You review, edit, or push back. Nothing advances without your sign-off.
+**Start a new engagement:**
+
+```text
+/doi-method:doi-run
+```
+
+**Resume an engagement:**
+Use the same command again. DOI checks saved state, shows where you left off, and continues.
+
+**Skip the front-door consultant:**
+Advanced users can call namespaced phase skills directly. Example:
+
+```text
+/doi-method:doi-engage
+```
+
+**Pause or stop:**
+Say `pause` or `stop` during the flow. State is saved.
+
+**Human gates:**
+After key phases, DOI shows the work and waits for approval before moving on.
 
 ---
 
 ## How It Works
 
-DOI Method is a consultant-first skill system. `doi-run` is the consultant — it interviews you, then routes to the appropriate execution path. The execution paths are separate skills that do the actual work.
+The `doi-run` skill is the consultant front door. In plugin installs, you invoke it as `/doi-method:doi-run`.
 
 ```text
-/doi-run (consultant)
+/doi-method:doi-run
     |
-    +--> /doi-intake (consulting-style interview)
+    +--> doi-intake
     |        |
     |        v
     |    context/ folder + company-profile.md
     |        |
     |        v
-    +--> Routing Interview: "What do you want?"
+    +--> Routing Interview
              |
      +-------+---------+------------+---------------+
      |                 |            |               |
      v                 v            v               v
- /doi-engage      /doi-assess   role loop     /doi-pillars
- (full pipeline)  (score only)  (one role)    (pillars only)
+ doi-engage       doi-assess    role loop      doi-pillars
+ (full pipeline)  (score only)  (one role)     (pillars only)
      |
      v
  Phase 1: doi-assess   --> [Critic] --> Gate
- Phase 2: doi-setup (per department)
+ Phase 2: doi-setup
     |
     +---- Per Role Loop ----+
     |  Phase 3: doi-verify   --> [Critic] --> Gate
@@ -192,69 +175,76 @@ DOI Method is a consultant-first skill system. `doi-run` is the consultant — i
  Phase 9: doi-roadmap  --> [Critic] --> Gate --> Done
 ```
 
-### Meta Commands
-
-| Command | What It Does |
-|---|---|
-| `doi-run` | **Consultant front-door.** Runs intake, then interviews you and routes to the right path. |
-| `doi-engage` | Runs the full 10-phase pipeline end-to-end without the routing interview. Assumes intake is already complete. |
-
-Use the plugin namespace prefix (`doi-method:`) when you installed DOI as a plugin.
-
-### Phase Commands
-
-| Phase | Command | What Happens |
-|---|---|---|
-| 0 | `doi-intake` | 7-section consulting-style interview — builds the `context/` folder every downstream phase reads from |
-| 1 | `doi-assess` | 30-question maturity checklist — determines Level 1-5 |
-| 2 | `doi-setup` | Define departments, roles, and department-level outcomes |
-| 3 | `doi-verify` | Probe actual day-to-day work vs. what is documented |
-| 4 | `doi-outcomes` | Map what each role is supposed to produce, tag every task |
-| 5 | `doi-roles` | Classify every task on a 4-stage AI automation scale |
-| 6 | `doi-friction` | Score friction across the Three Cs — calculate Friction Tax |
-| 7 | `doi-route` | Classify bottlenecks: People, Process, or Tools |
-| 8 | `doi-pillars` | Score foundational + advanced operational readiness |
-| 9 | `doi-roadmap` | Build the tiered, sequenced implementation plan |
-
-After each critical phase, an independent **critic agent** reviews the output in isolation — no access to the conversation, just the raw work. It flags methodology violations, scoring inconsistencies, and missing data before the next phase begins.
+After each critical phase, an independent **critic agent** reviews the output in isolation before the next phase begins.
 
 ---
 
 ## Why This Is Different
 
-**It is a consultant, not a questionnaire.** Most AI readiness tools ask you 20 questions and hand you a score. The DOI Method starts with a consulting-style intake, asks what you're trying to learn, and routes you to the path that actually answers the question. If you need a quick maturity score, you get that. If you need a full engagement, you get that. No forced commitment to a 10-phase pipeline you don't need.
+**It is a consultant, not a questionnaire.** DOI starts with intake, then routes to the path that actually answers the user's question.
 
-**It assesses from the inside out.** No surface-level scans. The method works with your people, department by department, role by role. It catches the gap between how work is documented and how it actually happens.
+**It assesses from the inside out.** It works department by department and role by role, not from surface-level assumptions.
 
-**It has a critic.** After every critical phase, an independent reviewer tears the work apart in isolation — no conversation context, just the raw output. Methodology violations, scoring inconsistencies, and blind spots get flagged before anything moves forward.
+**It has a critic.** Critical outputs are reviewed independently before the engagement advances.
 
-**The intake is real.** Phase 0 is not a 5-field form — it is a seven-section consulting interview that populates a `context/` folder every downstream phase reads from. Organization basics, current state, history with automation, tech stack, goals, constraints, stakeholders. Thin intake produces thin analysis; this intake is built to ground every phase that follows.
+**The intake is real.** Phase 0 is a seven-section consulting interview that grounds every later phase.
 
-**Built from 50+ client engagements.** This is not a framework designed in a vacuum. It is the methodology behind the [3rd Brain](https://3rdbrain.co) consulting practice, refined across real organizations over nearly four years.
+**It is built from client work.** This methodology was refined through real consulting engagements, not invented in a vacuum.
 
 ---
 
 ## The Framework
 
-**5 Maturity Levels** — from Information Silos (Level 1) to AI-Driven Automation (Level 5). Hard cap gate logic prevents inflated scoring — you cannot test into Level 3 if you are missing Level 2 fundamentals.
+**5 Maturity Levels**
+From Information Silos (Level 1) to AI-Driven Automation (Level 5), with hard-cap gate logic to prevent inflated scoring.
 
-**4-Stage AI Automation Scale** — every task in the assessment gets classified: Stage 1 (Rule-Based Workflows) through Stage 4 (AI Coworkers with autonomous responsibility). This is how the roadmap knows what to recommend.
+**4-Stage AI Automation Scale**
+Every task is classified from Stage 1 (Rule-Based Workflow) through Stage 4 (AI Coworker).
 
-**The Three Cs** — Consistency, Clarity, Capacity. They arrive in sequence. You cannot unlock Capacity gains until Consistency and Clarity are in place. Friction is measured against all three.
+**The Three Cs**
+Consistency, Clarity, Capacity. They arrive in sequence.
 
-**People > Process > Tools** — the sequencing principle behind every recommendation. Fix people gaps first, then process, then tools. The roadmap tiers follow this order because the reverse never works.
+**People -> Process -> Tools**
+The sequencing principle behind DOI's diagnosis and roadmap.
 
-**Outcome Mapping** — Phase 4 surfaces what each role is actually supposed to produce, solution-agnostic. Tasks get tagged as aligned, indirectly aligned, or unaligned. Unaligned tasks are flagged before any automation is recommended — because automating the wrong work faster is not a win.
+**Outcome Mapping**
+DOI distinguishes work that serves a defined result from work that is merely habitual, unmeasured, or unaligned.
 
-### Go Deeper
-
-The full methodology, frameworks, and case thinking behind the DOI Method are documented in the [**Digital Operations Playbook**](https://digitalopsplaybook.com). If you want to understand the why behind every phase, start there.
+The deeper framework and case thinking behind DOI are documented in the [Digital Operations Playbook](https://digitalopsplaybook.com).
 
 ---
 
-## Made by 3rd Brain
+## Advanced And Legacy Installs
 
-DOI Method is designed, built, and maintained by [**3rd Brain**](https://3rdbrain.co) — a digital operations consultancy that builds AI-native operating systems for growing businesses.
+These paths still exist, but they are **not** the default public install story.
+
+### Standalone Claude Code skills
+
+If you explicitly want bare `/doi-run` instead of plugin mode:
+
+```bash
+./install-doi.sh --standalone
+```
+
+Then use:
+
+```text
+/doi-run
+```
+
+### Cowork `.skill` imports
+
+If you explicitly want direct Cowork skill imports instead of a plugin upload:
+
+1. Build or download the `.skill` files from `dist/cowork/`
+2. Import them in Cowork
+3. Use `/doi-run`
+
+This is an advanced path and is less complete than the plugin install because it does not include the bundled reviewer agent.
+
+Full install details live in [INSTALL.md](INSTALL.md).
+
+---
 
 ## Uninstall
 
@@ -262,10 +252,14 @@ DOI Method is designed, built, and maintained by [**3rd Brain**](https://3rdbrai
 
 **Claude Code standalone:** `rm -rf ~/.claude/skills/doi-* ~/.claude/agents/doi-review ~/.claude/scripts/doi/`
 
-**Cowork plugin:** remove the installed DOI plugin from Customize → Plugins
+**Cowork plugin:** remove DOI from Customize -> Plugins
 
-**Cowork skills:** remove each `doi-*` skill from Skills → Manage
+**Cowork skills:** remove each `doi-*` skill from Skills -> Manage
 
 ---
 
-*Licensed under GPL-3.0. Copyright 2026 3rd Brain DigiOps. All rights reserved.*
+## Made by 3rd Brain
+
+DOI Method is designed and maintained by [3rd Brain](https://3rdbrain.co), a digital operations consultancy building AI-native operating systems for growing businesses.
+
+*Licensed under GPL-3.0. Copyright 2026 3rd Brain DigiOps.*
