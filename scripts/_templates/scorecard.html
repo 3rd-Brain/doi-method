@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DOI Scorecard</title>
+<style>
+  :root {
+    --fg: #111;
+    --muted: #666;
+    --line: #ddd;
+    --critical: #b00020;
+    --ok: #1a7f37;
+    --warn: #b95000;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font: 11pt/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    color: var(--fg);
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.5in;
+  }
+  h1 { font-size: 14pt; margin: 0 0 4pt; }
+  h2 { font-size: 11pt; margin: 14pt 0 4pt; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--line); padding-bottom: 2pt; }
+  .meta { color: var(--muted); font-size: 9pt; margin-bottom: 12pt; }
+  .verdict { font-weight: 600; }
+  .verdict .status-YES { color: var(--ok); }
+  .verdict .status-NO { color: var(--critical); }
+  .verdict .status-CONDITIONAL { color: var(--warn); }
+  table { width: 100%; border-collapse: collapse; margin: 6pt 0; }
+  th, td { text-align: left; padding: 3pt 6pt 3pt 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; font-size: 9pt; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+  td.score { font-weight: 600; width: 2em; }
+  td.tier { width: 3em; }
+  td.quarter { width: 3em; }
+  .effort { color: var(--muted); font-size: 9pt; }
+  .pending { color: var(--muted); font-style: italic; padding: 24pt 0; text-align: center; }
+  @media print {
+    body { padding: 0.5in; }
+    h2 { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="org">Loading...</h1>
+  <div class="meta"><span id="goal"></span> &middot; Generated <span id="date"></span></div>
+</header>
+
+<section id="verdict-section" hidden>
+  <h2>Verdict</h2>
+  <p class="verdict">
+    <span class="status" id="ready-status"></span> &mdash; <span id="summary-line"></span>
+  </p>
+  <p><strong>Largest constraint:</strong> <span id="constraint-line"></span></p>
+</section>
+
+<section id="ratings-section" hidden>
+  <h2>Readiness Ratings</h2>
+  <table>
+    <thead><tr><th>Pillar</th><th>Score</th><th>Justification</th></tr></thead>
+    <tbody id="ratings-body"></tbody>
+  </table>
+</section>
+
+<section id="deployable-section" hidden>
+  <h2>Deployable Workflows</h2>
+  <table>
+    <thead><tr><th>Tier</th><th>Workflow</th><th>Value</th><th>Quarter</th><th>Effort (human / DOI)</th></tr></thead>
+    <tbody id="deployable-body"></tbody>
+  </table>
+</section>
+
+<section id="remediation-section" hidden>
+  <h2>Remediation Roadmap</h2>
+  <ul id="remediation-list"></ul>
+</section>
+
+<section id="pending" hidden>
+  <p class="pending">Scorecard pending — earlier phases must complete first.</p>
+</section>
+
+<script>
+const PILLAR_LABELS = {
+  talent_strategy: "Talent Strategy",
+  workflow_optimization: "Workflow Optimization",
+  digital_architecture: "Digital Architecture",
+  knowledge_management: "Knowledge Management",
+  ai_automation: "AI Automation"
+};
+
+async function load() {
+  const idx = await fetch("./data/_index.json").then(r => r.json()).catch(() => null);
+  if (!idx || idx.scorecard !== "complete") {
+    document.getElementById("pending").hidden = false;
+    document.getElementById("org").textContent = idx?.organization || "DOI Engagement";
+    return;
+  }
+  const data = await fetch("./data/scorecard.json").then(r => r.json());
+  render(data);
+}
+
+function render(d) {
+  document.getElementById("org").textContent = d.organization;
+  document.getElementById("goal").textContent = d.primary_goal || "";
+  document.getElementById("date").textContent = d.generated_at;
+
+  // Verdict
+  const v = d.verdict;
+  const statusEl = document.getElementById("ready-status");
+  statusEl.textContent = v.ready_status;
+  statusEl.className = "status status-" + v.ready_status;
+  document.getElementById("summary-line").textContent = v.summary_line;
+  document.getElementById("constraint-line").textContent = v.constraint_line;
+  document.getElementById("verdict-section").hidden = false;
+
+  // Ratings
+  const ratingsBody = document.getElementById("ratings-body");
+  for (const [key, label] of Object.entries(PILLAR_LABELS)) {
+    const r = d.ratings[key];
+    if (!r) continue;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${label}</td><td class="score">${r.score}/5</td><td>${escapeHtml(r.justification)}</td>`;
+    ratingsBody.appendChild(tr);
+  }
+  document.getElementById("ratings-section").hidden = false;
+
+  // Deployable
+  const dBody = document.getElementById("deployable-body");
+  for (const w of d.deployable) {
+    const tr = document.createElement("tr");
+    const effort = (w.human_effort || w.doi_effort)
+      ? `<span class="effort">${escapeHtml(w.human_effort || "?")} &rarr; ${escapeHtml(w.doi_effort || "?")}</span>`
+      : "";
+    tr.innerHTML = `<td class="tier">T${w.tier}</td><td>${escapeHtml(w.name)}</td><td>${escapeHtml(w.value_line)}</td><td class="quarter">${w.quarter}</td><td>${effort}</td>`;
+    dBody.appendChild(tr);
+  }
+  document.getElementById("deployable-section").hidden = false;
+
+  // Remediation
+  const rList = document.getElementById("remediation-list");
+  ["q1","q2","q3"].forEach(q => {
+    if (!d.remediation[q]) return;
+    const li = document.createElement("li");
+    li.textContent = d.remediation[q];
+    rList.appendChild(li);
+  });
+  document.getElementById("remediation-section").hidden = false;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+load();
+</script>
+</body>
+</html>
