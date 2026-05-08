@@ -1,6 +1,6 @@
 ---
 name: doi-scorecard
-description: "Use after Phase 9 (doi-roadmap) to produce the engagement capstone — a one-page board-ready scorecard. Compresses 5 pillar scores to 1-5 ratings with one-sentence justifications, writes the verdict, finalizes the deployable Tier 1-2 list with quarterly assignments, and produces the remediation roadmap headlines. Cannot recommend, score from scratch, or override roadmap tier decisions."
+description: "Use after Phase 9 (doi-roadmap) to produce the engagement capstone — a one-page scorecard. Pulls the 5 pillar scores from Phase 8 (0-15 each) and labels them with rating text (Critical/Weak/Moderate/Strong/Mature), writes the verdict, finalizes the deployable Tier 1-2 list with quarterly assignments, and produces the remediation roadmap headlines. Cannot recommend, score from scratch, or override roadmap tier decisions."
 user-invocable: true
 license: GPL-3.0
 metadata:
@@ -43,7 +43,7 @@ The output exists for a single audience: a CFO or department head who has 90 sec
 
 ### Role Constraints
 
-- CAN: Read prior-phase outputs, compress pillar scores from 0-15 to 1-5, write the scorecard JSON and the markdown summary, copy roadmap tier and quarter assignments, name the single largest constraint
+- CAN: Read prior-phase outputs, copy pillar 0-15 scores from Phase 8 and label them with rating text, write the scorecard JSON and the markdown summary, copy roadmap tier and quarter assignments, name the single largest constraint
 - CANNOT: Score pillars from scratch (always uses Phase 8 output), add or remove interventions (uses Phase 9 roadmap as ground truth), soften the verdict to be polite (CONDITIONAL is the soft option; NO is real), invent dollar amounts or FTE counts not present in the roadmap
 
 ### Inputs
@@ -61,21 +61,25 @@ Read every file in this list before drafting. Each entry names what is pulled fr
 
 If any required input is missing, stop. Do not synthesize a stand-in. Tell the operator which file is missing and which phase produces it.
 
-### Compression Rules
+### Composition Rules
 
 These rules are mechanical. No judgment calls beyond what is named here.
 
-#### 1. Pillar 15-point score → 1-5 rating
+#### 1. Pillar score and rating text
 
-| 0-15 score | 1-5 rating |
+Copy the 0-15 score directly from Phase 8 (`foundational.md` and `advanced.md`). Label each score with rating text:
+
+| 0-15 score | rating_text |
 |---|---|
-| 0-3 | 1 |
-| 4-6 | 2 |
-| 7-9 | 3 |
-| 10-12 | 4 |
-| 13-15 | 5 |
+| 0-3 | Critical |
+| 4-6 | Weak |
+| 7-9 | Moderate |
+| 10-12 | Strong |
+| 13-15 | Mature |
 
-Apply to all five pillars. If `advanced.md` is absent (advanced gate failed in Phase 8), omit `knowledge_management` and `ai_automation` from the JSON ratings object - the schema requires only the three foundational pillars.
+Apply to all five pillars. If `advanced.md` is absent (advanced gate failed in Phase 8), omit `knowledge_management` and `ai_automation` from the JSON ratings object — the schema requires only the three foundational pillars.
+
+The score keeps its full precision (no compression). Rating text is the banded label a board-level reader scans first.
 
 #### 2. Justification per pillar
 
@@ -182,13 +186,13 @@ Printable markdown sibling. Render the same data using this exact format:
 
 ## Readiness Ratings
 
-| Pillar | Score | Justification |
-|---|---|---|
-| Talent Strategy | {{score}}/5 | {{justification}} |
-| Workflow Optimization | {{score}}/5 | {{justification}} |
-| Digital Architecture | {{score}}/5 | {{justification}} |
-| Knowledge Management | {{score}}/5 | {{justification}} |
-| AI Automation | {{score}}/5 | {{justification}} |
+| Pillar | Score | Rating | Justification |
+|---|---|---|---|
+| Talent Strategy | {{score}}/15 | {{rating_text}} | {{justification}} |
+| Workflow Optimization | {{score}}/15 | {{rating_text}} | {{justification}} |
+| Digital Architecture | {{score}}/15 | {{rating_text}} | {{justification}} |
+| Knowledge Management | {{score}}/15 | {{rating_text}} | {{justification}} |
+| AI Automation | {{score}}/15 | {{rating_text}} | {{justification}} |
 
 ## Deployable Workflows
 

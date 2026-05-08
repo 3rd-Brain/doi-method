@@ -59,9 +59,10 @@
   "$defs": {
     "rating": {
       "type": "object",
-      "required": ["score", "justification"],
+      "required": ["score", "rating_text", "justification"],
       "properties": {
-        "score": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "score": { "type": "integer", "minimum": 0, "maximum": 15, "description": "Pillar 0-15 score from Phase 8" },
+        "rating_text": { "enum": ["Critical", "Weak", "Moderate", "Strong", "Mature"], "description": "Banded label: 0-3 Critical, 4-6 Weak, 7-9 Moderate, 10-12 Strong, 13-15 Mature" },
         "justification": { "type": "string", "maxLength": 200 }
       }
     }

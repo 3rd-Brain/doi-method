@@ -8,11 +8,11 @@
     "constraint_line": "CRM data quality is the single largest blocker"
   },
   "ratings": {
-    "talent_strategy": { "score": 3, "justification": "Two ops leads with prompt-design depth; no ML capacity" },
-    "workflow_optimization": { "score": 2, "justification": "Sales pipeline documented but handoffs are tribal" },
-    "digital_architecture": { "score": 2, "justification": "HubSpot + Sheets only; no integration layer" },
-    "knowledge_management": { "score": 1, "justification": "No central knowledge base; SOPs live in Slack" },
-    "ai_automation": { "score": 2, "justification": "ChatGPT seats exist; nothing in production workflow" }
+    "talent_strategy": { "score": 8, "rating_text": "Moderate", "justification": "Two ops leads with prompt-design depth; no ML capacity" },
+    "workflow_optimization": { "score": 5, "rating_text": "Weak", "justification": "Sales pipeline documented but handoffs are tribal" },
+    "digital_architecture": { "score": 5, "rating_text": "Weak", "justification": "HubSpot + Sheets only; no integration layer" },
+    "knowledge_management": { "score": 2, "rating_text": "Critical", "justification": "No central knowledge base; SOPs live in Slack" },
+    "ai_automation": { "score": 5, "rating_text": "Weak", "justification": "ChatGPT seats exist; nothing in production workflow" }
   },
   "deployable": [
     {
