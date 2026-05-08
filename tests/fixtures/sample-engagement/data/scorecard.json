@@ -1,0 +1,51 @@
+{
+  "organization": "Acme Widgets",
+  "primary_goal": "Reduce sales-ops friction so AEs can spend more time selling",
+  "generated_at": "2026-05-08",
+  "verdict": {
+    "ready_status": "CONDITIONAL",
+    "summary_line": "3 deployable workflows, ~$45K committed, 0.5 FTE for 90 days",
+    "constraint_line": "CRM data quality is the single largest blocker"
+  },
+  "ratings": {
+    "talent_strategy": { "score": 3, "justification": "Two ops leads with prompt-design depth; no ML capacity" },
+    "workflow_optimization": { "score": 2, "justification": "Sales pipeline documented but handoffs are tribal" },
+    "digital_architecture": { "score": 2, "justification": "HubSpot + Sheets only; no integration layer" },
+    "knowledge_management": { "score": 1, "justification": "No central knowledge base; SOPs live in Slack" },
+    "ai_automation": { "score": 2, "justification": "ChatGPT seats exist; nothing in production workflow" }
+  },
+  "deployable": [
+    {
+      "slug": "lead-enrichment-skill",
+      "name": "Lead enrichment Claude Skill",
+      "tier": 1,
+      "value_line": "Removes ~6 hrs/week of AE manual research per rep",
+      "quarter": "Q3",
+      "human_effort": "2 weeks of consultant + AE time",
+      "doi_effort": "1 day to scaffold + 1 week to demo"
+    },
+    {
+      "slug": "pipeline-hygiene-icm",
+      "name": "Pipeline hygiene ICM folder",
+      "tier": 1,
+      "value_line": "Replaces tribal Slack handoffs with file-based stages",
+      "quarter": "Q3",
+      "human_effort": "3 weeks",
+      "doi_effort": "2 days"
+    },
+    {
+      "slug": "renewal-followup-automation",
+      "name": "Renewal followup automation (Zapier)",
+      "tier": 2,
+      "value_line": "Captures the 12% of renewals currently dropped",
+      "quarter": "Q4",
+      "human_effort": "1 week",
+      "doi_effort": "4 hours"
+    }
+  ],
+  "remediation": {
+    "q1": "Q1 (current): Stand up CRM data hygiene SOP — owner: ops lead — budget: $0",
+    "q2": "Q2: Ship lead-enrichment skill + pipeline ICM — owner: ops lead — budget: $30K",
+    "q3": "Q3: Renewal followup automation + measured Stage 3 review — owner: rev ops — budget: $15K"
+  }
+}

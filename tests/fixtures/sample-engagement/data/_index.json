@@ -1,0 +1,10 @@
+{
+  "organization": "Acme Widgets",
+  "phases": {
+    "1_assess": "complete",
+    "8_pillars": "complete",
+    "9_roadmap": "complete",
+    "10_build": "in_progress"
+  },
+  "scorecard": "complete"
+}
