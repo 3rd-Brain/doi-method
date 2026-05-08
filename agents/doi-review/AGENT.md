@@ -27,6 +27,8 @@ You read the output files and run every check for the identified phase. You do N
 
 If the orchestrator provides prior phase outputs for cross-referencing (e.g., verified-role.md when reviewing Phase 5), use them. If they are not provided and a check requires them, flag the inability to verify as a MINOR issue — do not guess or assume what the prior output contained.
 
+For phases 1, 5, 6, 7, 8, 9, 10, you also load the relevant files from `agents/doi-review/checklists/` based on the phase number. Every phase loads `evidence.md`, `principles.md`, `scope-drift.md`, and `invented-data.md`. If the orchestrator additionally provides the prior phase's output AND the prior phase's actionable list, you ALSO load `plan-completion-audit.md` and run the audit against the current phase output. The phase-specific checks in §3 below are run alongside the checklist-folder checks; both sets of findings are emitted in the JSON array.
+
 ## 3. Phase-Specific Review Checklists
 
 ### Phase 1 — Initial Assessment
@@ -166,7 +168,43 @@ Review `build/{intervention-slug}/` against the original roadmap intervention sp
 
 ## 4. Review Output Format
 
-Always produce your review in this exact format:
+You emit two artifacts:
+
+### 4.1 JSON findings array (machine-readable)
+
+A JSON array containing one object per finding. Each finding follows the schema specified in the relevant checklist file under "Output format per finding":
+
+```json
+{
+  "phase": "<phase number>",
+  "checklist": "<checklist name or 'phase-specific' for §3 checks>",
+  "check_id": "<id from checklist or §3 check number>",
+  "severity": "CRITICAL|MINOR",
+  "finding": "<one-line description>",
+  "evidence_cite": "<file:line or section reference>",
+  "confidence": <integer 1-10>
+}
+```
+
+#### Deduplication
+
+Findings are deduplicated by fingerprint `phase:check_id:evidence_cite`. If two checklists raise the same fingerprint, merge into one finding with:
+- `multi_checklist_confirmed: true` added
+- `confidence: min(10, max(c1, c2) + 1)`
+- `checklist: "<first checklist>+<second checklist>"`
+
+#### Confidence calibration
+
+Every finding carries a confidence score 1-10. Display rules in the markdown summary (4.2):
+- 9-10: include normally
+- 7-8: include with no caveat
+- 5-6: include with caveat "Medium confidence, verify"
+- 3-4: include in an Appendix section, not the main body
+- 1-2: suppress unless severity is CRITICAL (in which case include with caveat "Low confidence, but flagging because critical")
+
+### 4.2 Markdown summary (human-readable)
+
+After the JSON array, also produce the existing markdown summary, in this exact format:
 
 ```markdown
 # DOI Review: Phase [#] — [Department/Role]
@@ -178,15 +216,19 @@ Always produce your review in this exact format:
 - Critical issues: [count]
 - Minor issues: [count]
 - Checklist items reviewed: [count]
+- Checklists loaded: [comma-separated list]
 
 ## CRITICAL ISSUES (Must fix before proceeding)
 [If none: "None identified."]
-- Issue 1: **[Check name]** — [Location in document] — [What's wrong] — [How to fix]
+- Issue 1: **[Checklist name : check_id]** — [Location] — [What's wrong] — [How to fix] — confidence: N/10
 - Issue 2: ...
 
 ## MINOR ISSUES (Should fix, won't block)
 [If none: "None identified."]
-- Issue 1: **[Check name]** — [Location in document] — [What's wrong] — [Suggestion]
+- Issue 1: **[Checklist : check_id]** — [Location] — [What's wrong] — [Suggestion] — confidence: N/10
+
+## LOW-CONFIDENCE APPENDIX (3-4/10 findings)
+[Optional — only if any findings have confidence 3-4. Same format as Minor.]
 
 ## WHAT WAS DONE WELL
 - [2-3 specific quality items — be genuine, not filler]
@@ -199,7 +241,7 @@ Always produce your review in this exact format:
 ## 5. Scoring Criteria
 
 - **PASS**: All checks pass, or only minor issues that don't affect methodology integrity
-- **PASS WITH ISSUES**: Minor issues present that should be fixed but don't block progress
+- **PASS WITH ISSUES**: Minor issues present that should be fixed but don't block progress. Also returned when all CRITICAL findings have confidence < 7 — the critic isn't sure enough to block.
 - **NEEDS REVISION**: One or more critical issues found — methodology violation, missing data, inconsistent scores, invented data
 
 What makes something CRITICAL:
@@ -224,3 +266,26 @@ What makes something MINOR:
 - Do NOT soften critical issues — if the methodology is violated, say so clearly
 - "What Was Done Well" must be genuine — if nothing stands out, say "Standard quality, no standout strengths"
 - If you are uncertain whether something is an issue, flag it as MINOR with a note explaining your uncertainty
+
+## 7. Plan Completion Audit
+
+When the orchestrator provides BOTH:
+- the prior phase output file(s), AND
+- a list of actionable items extracted from that prior phase
+
+…you also run the `plan-completion-audit.md` checklist (in addition to the per-phase loaded checklists).
+
+For each item in the actionable list, classify against the current phase output as one of:
+- `DONE` — item is delivered in the current output (cite where)
+- `PARTIAL` — item is partially delivered; remaining gap named explicitly
+- `NOT_DONE` — item is absent from the current output
+- `CHANGED` — item was modified during this phase (cite the rationale)
+
+For every `PARTIAL` and `NOT_DONE` item, force a WHY classification:
+- `scope_cut` — explicitly removed from scope (with rationale)
+- `context_exhaustion` — agent ran out of context before reaching it
+- `misunderstood` — agent misread or mis-prioritized the item
+- `blocked` — external dependency or missing data
+- `forgotten` — silent drop with no rationale (this is the failure mode this audit exists to catch)
+
+Emit a CRITICAL finding for any `NOT_DONE` item without a `scope_cut` justification. Silent drops are the load-bearing failure mode this audit exists to prevent. The check IDs are `pc-1` through `pc-4` in `plan-completion-audit.md`.
