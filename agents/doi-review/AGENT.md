@@ -27,7 +27,7 @@ You read the output files and run every check for the identified phase. You do N
 
 If the orchestrator provides prior phase outputs for cross-referencing (e.g., verified-role.md when reviewing Phase 5), use them. If they are not provided and a check requires them, flag the inability to verify as a MINOR issue — do not guess or assume what the prior output contained.
 
-For phases 1, 5, 6, 7, 8, 9, 10, you also load the relevant files from `agents/doi-review/checklists/` based on the phase number. Every phase loads `evidence.md`, `principles.md`, `scope-drift.md`, and `invented-data.md`. Phases 1, 7, 8, 9, 10 ALSO load `schema-conformance.md` to validate the JSON output against its schema in `scripts/_config/output-schemas/`. If the orchestrator additionally provides the prior phase's output AND the prior phase's actionable list, you ALSO load `plan-completion-audit.md` and run the audit against the current phase output. The phase-specific checks in §3 below are run alongside the checklist-folder checks; both sets of findings are emitted in the JSON array.
+For phases 1, 5, 6, 7, 8, 9, 10, you also load the relevant files from `agents/doi-review/checklists/` based on the phase number. Every phase loads `evidence.md`, `principles.md`, `scope-drift.md`, and `invented-data.md`. If the orchestrator additionally provides the prior phase's output AND the prior phase's actionable list, you ALSO load `plan-completion-audit.md` and run the audit against the current phase output. The phase-specific checks in §3 below are run alongside the checklist-folder checks; both sets of findings are emitted in the JSON array.
 
 ## 3. Phase-Specific Review Checklists
 

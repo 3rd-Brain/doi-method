@@ -273,37 +273,13 @@ Within each tier, follow this order:
 - Do NOT [next item]
 ```
 
-### JSON output (companion file)
+### Effort labels (Tier 1 and Tier 2 required)
 
-After writing `roadmap.md`, also write `data/phase-9-roadmap.json` matching the schema at `scripts/_config/output-schemas/roadmap.json`.
+Every Tier 1 and Tier 2 intervention MUST include both:
+- **Human consultant effort:** time a hired consultant alone would need (e.g., "2 weeks of consultant + AE time")
+- **DOI effort:** time using DOI (e.g., "1 day to scaffold + 1 week demo")
 
-Required fields:
-- `department` (string), `generated_at` (date)
-- `tier_1`, `tier_2`, `tier_3` (arrays of intervention objects)
-- `existing_systems_to_extend` (array of strings — system names from the verified tool list)
-- `what_not_to_do_yet` (array of `{intervention, reason}` objects)
-- `outcome_gaps` (array of strings) — outcomes from `outcome-map.md` with no Tier 1-2 intervention
-- `unaligned_work` (array of strings) — tasks tagged `unaligned` with their time estimates
-
-Each tier intervention requires: `slug`, `name`, `intervention_summary`, `friction_score`, `stage`, `bottleneck_type`, `result_advanced`.
-
-Tier 1 entries additionally require: `shippable_subset_1_week`, `demo_definition`, `state_owner`, `feedback_signal`, `deletion_impact`, `principle_compliance` (object with `p1, p2_p4, p3, p5, p6, p7` keys, each value `"yes"`, `"N/A: <reason>"`, or `"violation: <reason>"`).
-
-Tier 2 entries additionally require: `principle_compliance` (same shape as Tier 1).
-
-**Effort labels (Tier 1 and Tier 2 only):** every Tier 1 and Tier 2 intervention MUST include both:
-- `human_effort:` time a human consultant alone would need (e.g., "2 weeks of consultant + AE time")
-- `doi_effort:` time using the DOI pipeline (e.g., "1 day to scaffold + 1 week demo")
-
-These appear on the scorecard as the "Effort (human / DOI)" column. They make the AI compression visible at decision time. Source: gstack ETHOS.md "Effort both-scales" framing — adapted for consulting (human consultant vs. DOI pipeline) instead of (human team vs. CC+gstack).
-
-Then update the engagement index:
-
-```bash
-$DOI_SCRIPTS/update-index.sh "<engagement-folder>" "9_roadmap" "complete"
-```
-
-Every intervention's `result_advanced` must trace to a result in `outcome-map.md`, or the value `"operational efficiency only"` with rationale.
+These appear on the scorecard as the "Effort (human / DOI)" column. They make the AI compression visible at decision time so the operator can defend the budget ask to their stakeholders.
 
 ### Human Gate Format
 

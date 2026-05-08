@@ -218,27 +218,6 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 [Always close by connecting to the primary goal from company-profile.md: "For your goal of [Y], this matters because [Z]."]
 ```
 
-### JSON output (companion file)
-
-After writing `assessments/maturity-assessment.md`, also write `data/phase-1-assess.json` matching the schema at `scripts/_config/output-schemas/assess.json`.
-
-Required fields:
-- `organization` (string)
-- `level` (integer 1-5) — the determined maturity level
-- `total_score` (integer 0-30) — total "yes" responses across all 5 categories
-- `category_scores` (object) — `panel0_yes`, `panel1_yes`, `panel2_yes`, `panel3_yes`, `panel4_yes` (each integer 0-6)
-- `cap_reason` (string or null) — must match `cap_reason` in the markdown frontmatter
-- `cap_gates_failed` (array of strings) — list of failed gate identifiers, e.g., `["panel2_item0", "panel3_item0"]`
-- `generated_at` (string, format date)
-
-Then update the engagement index:
-
-```bash
-$DOI_SCRIPTS/update-index.sh "<engagement-folder>" "1_assess" "complete"
-```
-
-The JSON content is a structured serialization of the markdown — no new facts, no invented data.
-
 ### Constraints
 
 - Ask questions conversationally — explain each if the user seems unsure

@@ -224,9 +224,6 @@ Every engagement workspace also creates a `scorecard.html` and a `data/` folder.
   serve.sh / serve.cmd        # python -m http.server convenience
   data/
     _index.json               # phase status registry
-    phase-1-assess.json       # written by doi-assess
-    phase-8-pillars-foundational.json
-    phase-9-roadmap.json
     scorecard.json            # written by doi-scorecard (Phase 9 capstone)
 ```
 

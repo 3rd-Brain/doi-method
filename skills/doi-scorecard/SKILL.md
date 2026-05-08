@@ -220,4 +220,6 @@ If `human_effort` or `doi_effort` is absent for a deployable row, write "see roa
 
 ### Critic checks (which checklists apply)
 
-The `doi-review` critic loads `evidence.md`, `principles.md`, `scope-drift.md`, and `invented-data.md` for this phase - every claim in the scorecard must trace to a prior-phase file, every dollar figure must trace to the roadmap, and every constraint must trace to either a maturity cap or a Phase 8 pillar score. A `schema-conformance.md` checklist (added in Phase 3 of the implementation plan) will validate the JSON output against `scripts/_config/output-schemas/scorecard.json` and fail the phase if the JSON does not parse or does not match the schema. The schema check is the hardest gate: a scorecard that does not validate does not ship.
+The `doi-review` critic loads `evidence.md`, `principles.md`, `scope-drift.md`, and `invented-data.md` for this phase. Every claim in the scorecard must trace to a prior-phase file, every dollar figure must trace to the roadmap, and every constraint must trace to either a maturity cap or a Phase 8 pillar score.
+
+The skill also runs its own JSON Schema validation against `scripts/_config/output-schemas/scorecard.json` before declaring success (see Output §1 above). A scorecard that does not validate does not ship.

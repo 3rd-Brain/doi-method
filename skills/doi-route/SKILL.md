@@ -225,31 +225,6 @@ Stage 1-2 interventions can begin immediately. These build the Consistency and C
 Foundation supports all intervention stages. Consistency and Clarity are established — Stage 3-4 work can proceed toward Capacity gains.
 ```
 
-### JSON output (companion file)
-
-After writing `departments/{dept}/gap-analysis.md`, also write `data/phase-7-route.json` matching the schema at `scripts/_config/output-schemas/route.json`.
-
-Required fields:
-- `department` (string), `generated_at` (date)
-- `interventions` (array). Each intervention has:
-  - `task_slug` (string)
-  - `friction_score` (integer 0-15)
-  - `bottleneck_type` (one of `people`, `process`, `tools`)
-  - `intervention_summary` (string)
-  - `stage` (integer 1-4)
-  - For `tools` bottlenecks: `tags` (array containing exactly one of `files-default` / `infrastructure-justified` AND exactly one of `extend-existing` / `new-system`)
-  - When `tags` includes `infrastructure-justified`: `file_failure_mode` (string — concurrent writes, aggregations, or >10K-row scale)
-  - When `tags` includes `extend-existing`: `extends_tool` (string — must match a tool from `verified-role.md`)
-  - When `tags` includes `new-system`: `new_system_justification` (string)
-
-Then update the engagement index:
-
-```bash
-$DOI_SCRIPTS/update-index.sh "<engagement-folder>" "7_route" "complete"
-```
-
-Tags and file_failure_mode citations must trace to evidence in prior phases. No invented data.
-
 ### Human Gate Format
 
 When pausing for human approval after this phase, present the gate using this structure (adapted from gstack's review/SKILL.md AskUserQuestion format):
