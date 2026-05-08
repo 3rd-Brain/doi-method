@@ -34,6 +34,9 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 ```
 
 ### Overview
+
+> **Voice:** Read `scripts/_config/voice.md` before drafting any client-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+
 Phase 9 of the DOI Method. Planner — the final deliverable. Synthesizes everything from prior phases into an actionable, sequenced implementation roadmap. Prioritizes interventions, sorts into tiers, sequences within tiers, and projects impact.
 
 ### Role Constraints

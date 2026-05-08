@@ -37,6 +37,8 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 
 ## 1. Overview
 
+> **Voice:** Read `scripts/_config/voice.md` before drafting any client-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+
 Phase 10 of the DOI Method — the first phase that **produces working artifacts** for the client, not analysis documents. doi-build reads the approved `roadmap.md`, walks the operator through which interventions to build (default: Tier 1 only), dispatches a `doi-builder` subagent per intervention, runs critic review on each artifact, and gates per-intervention so the operator can actually ship and test before the next one is built.
 
 **This is the phase that makes Principle 3 — Ship every week — real.** Each artifact is built to the **1-week shippable subset** declared in the roadmap, not the eventual full design. The operator demos it, uses it, learns from it, and only then does the next artifact get built.

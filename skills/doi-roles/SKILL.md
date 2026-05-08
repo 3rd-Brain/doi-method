@@ -35,6 +35,8 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 
 ### Overview
 
+> **Voice:** Read `scripts/_config/voice.md` before drafting any client-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+
 Phase 5 of the DOI Method. Analyst — extracts tasks from verified role profiles, classifies automation potential, and decomposes into implementable units. This is the technical core of DOI.
 
 Before classifying tasks or decomposing microservices, this phase researches the client's actual software capabilities — API docs, integration catalogs, automation features — so that workflow steps and microservice designs reference real, verified capabilities rather than assumptions.
