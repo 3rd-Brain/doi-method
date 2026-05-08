@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "doi-method/roadmap.json",
+  "title": "DOI Phase 9 — Implementation Roadmap",
+  "description": "Structured form of departments/{dept-slug}/roadmap.md. Tier 1 (Quick Wins, ship in 1 week), Tier 2 (Strategic Investments), Tier 3 (Future Capabilities). Tier 1 carries the strictest doctrine fields (1-week shippable subset, demo definition, three architect questions). Tier 1 + Tier 2 carry the build doctrine compliance block and identify which result they advance.",
+  "type": "object",
+  "required": [
+    "department",
+    "generated_at",
+    "tier_1",
+    "tier_2",
+    "tier_3",
+    "existing_systems_to_extend",
+    "what_not_to_do_yet",
+    "outcome_gaps",
+    "unaligned_work"
+  ],
+  "properties": {
+    "department": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "current_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "current_friction_tax": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Department Friction Tax percentage at start of roadmap."
+    },
+    "projected_friction_after_tier1": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "projected_level_after_tier2": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "primary_goal": {
+      "type": "string",
+      "description": "From company-profile.md — roadmap must explicitly tie back to this."
+    },
+    "tier_1": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tier_1_intervention"
+      }
+    },
+    "tier_2": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tier_2_intervention"
+      }
+    },
+    "tier_3": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/tier_3_intervention"
+      }
+    },
+    "existing_systems_to_extend": {
+      "type": "array",
+      "description": "Per Principle 6 — pulled from verified tool list and _uploads/. Each entry is the system name as a string.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "what_not_to_do_yet": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "intervention",
+          "reason"
+        ],
+        "properties": {
+          "intervention": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "outcome_gaps": {
+      "type": "array",
+      "description": "Results identified as important but with no supporting task or process.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unaligned_work": {
+      "type": "array",
+      "description": "Tasks that consume operational capacity but cannot be traced to a defined business result.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "foundation_progress": {
+      "type": "object",
+      "description": "Hard cap gate progression (current / after Tier 1 / after Tier 2). Free-form to mirror the markdown table.",
+      "properties": {
+        "panel2_item0": {
+          "$ref": "#/$defs/gate_progression"
+        },
+        "panel2_item4": {
+          "$ref": "#/$defs/gate_progression"
+        },
+        "panel3_item0": {
+          "$ref": "#/$defs/gate_progression"
+        },
+        "panel3_item3": {
+          "$ref": "#/$defs/gate_progression"
+        },
+        "panel3_item5": {
+          "$ref": "#/$defs/gate_progression"
+        },
+        "panel1_item0": {
+          "$ref": "#/$defs/gate_progression"
+        },
+        "panel1_item2": {
+          "$ref": "#/$defs/gate_progression"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "principle_compliance": {
+      "type": "object",
+      "description": "Build doctrine compliance block. Each principle is 'yes', 'N/A: <reason>', or 'violation: <reason>'.",
+      "required": [
+        "p1",
+        "p2_p4",
+        "p3",
+        "p5",
+        "p6",
+        "p7"
+      ],
+      "properties": {
+        "p1": {
+          "type": "string",
+          "description": "Frontend-first for apps."
+        },
+        "p2_p4": {
+          "type": "string",
+          "description": "Solo-agent / single agent until proven otherwise."
+        },
+        "p3": {
+          "type": "string",
+          "description": "Ship every week."
+        },
+        "p5": {
+          "type": "string",
+          "description": "ICM and folders before infrastructure."
+        },
+        "p6": {
+          "type": "string",
+          "description": "Start with what we have built."
+        },
+        "p7": {
+          "type": "string",
+          "description": "Demo before doc + the three architect questions."
+        }
+      }
+    },
+    "intervention_base": {
+      "type": "object",
+      "required": [
+        "slug",
+        "name",
+        "intervention_summary",
+        "friction_score",
+        "stage",
+        "bottleneck_type",
+        "result_advanced"
+      ],
+      "properties": {
+        "slug": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "intervention_summary": {
+          "type": "string",
+          "description": "Specific, actionable description."
+        },
+        "friction_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "stage": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "bottleneck_type": {
+          "enum": [
+            "people",
+            "process",
+            "tools"
+          ]
+        },
+        "result_advanced": {
+          "type": "string",
+          "description": "R# — result name, or 'operational efficiency only'."
+        },
+        "existing_system_extended": {
+          "type": "string",
+          "description": "Tool name from existing_systems_to_extend, or 'new — justification: ...'."
+        },
+        "tasks_impacted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "human_effort": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "e.g. '2 weeks'. Phase 6 of the broader plan promotes this to required for Tier 1-2; until then, optional."
+        },
+        "doi_effort": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "e.g. '1 hour'. Phase 6 of the broader plan promotes this to required for Tier 1-2; until then, optional."
+        }
+      }
+    },
+    "tier_1_intervention": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/intervention_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "shippable_subset_1_week",
+            "demo_definition",
+            "state_owner",
+            "feedback_signal",
+            "deletion_impact",
+            "principle_compliance"
+          ],
+          "properties": {
+            "shippable_subset_1_week": {
+              "type": "string",
+              "description": "Smallest version a user can demo end-to-end after week 1 (Principle 3)."
+            },
+            "demo_definition": {
+              "type": "string",
+              "description": "What the operator opens, types, or clicks at the end of week 1 to verify it's working."
+            },
+            "state_owner": {
+              "type": "string",
+              "description": "Single component that owns this data (architect question 1)."
+            },
+            "feedback_signal": {
+              "type": "string",
+              "description": "Log/metric/error that proves it's working (architect question 2)."
+            },
+            "deletion_impact": {
+              "type": "string",
+              "description": "What breaks if this is removed (architect question 3)."
+            },
+            "principle_compliance": {
+              "$ref": "#/$defs/principle_compliance"
+            }
+          }
+        }
+      ]
+    },
+    "tier_2_intervention": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/intervention_base"
+        },
+        {
+          "type": "object",
+          "required": [
+            "principle_compliance"
+          ],
+          "properties": {
+            "principle_compliance": {
+              "$ref": "#/$defs/principle_compliance"
+            }
+          }
+        }
+      ]
+    },
+    "tier_3_intervention": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/intervention_base"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "foundation_requirement": {
+              "type": "string",
+              "description": "Why this is gated to Tier 3 (e.g. 'Requires Level 3 maturity')."
+            }
+          }
+        }
+      ]
+    },
+    "gate_progression": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "enum": [
+            "Yes",
+            "No"
+          ]
+        },
+        "after_tier_1": {
+          "enum": [
+            "Yes",
+            "No",
+            "Projected"
+          ]
+        },
+        "after_tier_2": {
+          "enum": [
+            "Yes",
+            "No",
+            "Projected"
+          ]
+        }
+      }
+    }
+  }
+}

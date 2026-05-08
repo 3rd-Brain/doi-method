@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "doi-method/assess.json",
+  "title": "DOI Phase 1 — Initial Maturity Assessment",
+  "description": "Structured form of assessments/maturity-assessment.md. Captures the 30-question scoring outcome, per-category yes counts, hard-cap gate logic, and resulting maturity level (1-5).",
+  "type": "object",
+  "required": [
+    "organization",
+    "generated_at",
+    "level",
+    "total_score",
+    "category_scores",
+    "cap_reason"
+  ],
+  "properties": {
+    "organization": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Final maturity level after applying total score AND hard cap gates."
+    },
+    "level_name": {
+      "type": "string",
+      "description": "e.g. 'Information Silos', 'Integratable Cloud', 'Unified Data Layer', 'Automated Workflow with Human-in-the-Loop', 'AI-Driven Automation'."
+    },
+    "total_score": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 30,
+      "description": "Sum of yes-responses across all 5 category panels (each panel max 6)."
+    },
+    "category_scores": {
+      "type": "object",
+      "description": "Per-category yes counts. Each panel has 6 questions, so each value is 0-6.",
+      "required": [
+        "panel0_yes",
+        "panel1_yes",
+        "panel2_yes",
+        "panel3_yes",
+        "panel4_yes"
+      ],
+      "properties": {
+        "panel0_yes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "description": "People & Team Structure"
+        },
+        "panel1_yes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "description": "Process Documentation"
+        },
+        "panel2_yes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "description": "Technology Systems"
+        },
+        "panel3_yes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "description": "Data Management"
+        },
+        "panel4_yes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 6,
+          "description": "Automation Implementation"
+        }
+      }
+    },
+    "capped": {
+      "type": "boolean",
+      "description": "True iff one or more hard cap gates failed and forced level below the score-implied level."
+    },
+    "cap_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Plain-language reason for the cap, or null if no cap applied."
+    },
+    "cap_gates_failed": {
+      "type": "array",
+      "description": "Identifiers of the panel items that triggered the cap (e.g. panel2_item0).",
+      "items": {
+        "type": "string",
+        "pattern": "^panel[0-4]_item[0-5]$"
+      }
+    },
+    "primary_goal": {
+      "type": "string",
+      "description": "Reproduced from company-profile.md so downstream tools don't need to re-read it."
+    }
+  }
+}

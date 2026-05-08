@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "doi-method/pillars-advanced.json",
+  "title": "DOI Phase 8 — Advanced Pillars Assessment",
+  "description": "Structured form of departments/{dept-slug}/assessments/advanced.md. Two advanced pillars (Knowledge Management, AI Automation), each scored 3-15 with 3 sub-dimensions scored 1-5. Only produced when the advanced gate (foundational_level == 3 AND every foundational pillar >= 8/15) passes.",
+  "type": "object",
+  "required": [
+    "department",
+    "generated_at",
+    "pillars",
+    "gate_check_passed"
+  ],
+  "properties": {
+    "department": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "gate_check_passed": {
+      "type": "boolean",
+      "description": "Must be true for this file to exist. Recorded explicitly so downstream tooling can verify the gate was honored."
+    },
+    "pillars": {
+      "type": "object",
+      "required": [
+        "knowledge_management",
+        "ai_automation"
+      ],
+      "properties": {
+        "knowledge_management": {
+          "$ref": "#/$defs/pillar"
+        },
+        "ai_automation": {
+          "$ref": "#/$defs/pillar"
+        }
+      }
+    },
+    "total_advanced": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 30,
+      "description": "Sum of the two advanced pillar totals."
+    },
+    "tool_validation_notes": {
+      "type": "string",
+      "description": "Free-form prose on claimed-vs-observed AI/automation capabilities."
+    }
+  },
+  "$defs": {
+    "evidence_cite": {
+      "type": "string",
+      "description": "File path with optional section/line — e.g. 'verified-role.md §2', 'gap-analysis.md row 4', '_uploads/MANIFEST.md row 7'."
+    },
+    "rating_15": {
+      "type": "object",
+      "description": "Sub-dimension score 0-5 with justification and evidence citation.",
+      "required": [
+        "score",
+        "justification",
+        "evidence_cite"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "justification": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "evidence_cite": {
+          "$ref": "#/$defs/evidence_cite"
+        }
+      }
+    },
+    "pillar": {
+      "type": "object",
+      "required": [
+        "score",
+        "sub_dimensions"
+      ],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15,
+          "description": "Pillar total. Must equal sum of sub_dimensions[*].score."
+        },
+        "sub_dimensions": {
+          "type": "array",
+          "description": "Three sub-dimensions per advanced pillar. Each is a rating_15.",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/rating_15"
+          }
+        }
+      }
+    }
+  }
+}

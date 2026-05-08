@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "doi-method/route.json",
+  "title": "DOI Phase 7 — Bottleneck Routing / Gap Analysis",
+  "description": "Structured form of departments/{dept-slug}/gap-analysis.md. One entry per moderate-or-higher friction task (>= 6/15) with bottleneck classification, automation stage, and intervention summary. Tools-classified interventions carry Principle 5 and Principle 6 tags.",
+  "type": "object",
+  "required": [
+    "department",
+    "generated_at",
+    "interventions"
+  ],
+  "properties": {
+    "department": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "maturity_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Reproduced from Phase 1, used by the Foundation Check to gate Stage 3-4 interventions."
+    },
+    "bottleneck_summary": {
+      "type": "object",
+      "description": "Counts per bottleneck type. Must match the count of interventions per bottleneck_type.",
+      "properties": {
+        "people": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "process": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tools": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "interventions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/intervention"
+      }
+    }
+  },
+  "$defs": {
+    "evidence_cite": {
+      "type": "string",
+      "description": "File path with optional section/line — e.g. 'verified-role.md §2', 'tasks/data-export.md', '_uploads/MANIFEST.md row 7'."
+    },
+    "intervention": {
+      "type": "object",
+      "required": [
+        "task_slug",
+        "friction_score",
+        "bottleneck_type",
+        "intervention_summary",
+        "stage"
+      ],
+      "properties": {
+        "task_slug": {
+          "type": "string",
+          "description": "Slug of the source task in roles/{role-slug}/tasks/{slug}.md."
+        },
+        "role_slug": {
+          "type": "string"
+        },
+        "friction_score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "bottleneck_type": {
+          "enum": [
+            "people",
+            "process",
+            "tools"
+          ],
+          "description": "Primary bottleneck type. Multi-bottleneck tasks list primary here and secondaries in additional_bottlenecks."
+        },
+        "additional_bottlenecks": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "people",
+              "process",
+              "tools"
+            ]
+          }
+        },
+        "stage": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4,
+          "description": "Automation stage from Phase 5 classification. Drives intervention routing within bottleneck type."
+        },
+        "intervention_summary": {
+          "type": "string",
+          "description": "Specific, actionable intervention description — 'Connect HubSpot to Sheets via Zapier', not 'Integrate tools'."
+        },
+        "result_blocked": {
+          "type": "string",
+          "description": "R# — result name from outcome-map.md, or 'No defined result'."
+        },
+        "c_blocked": {
+          "enum": [
+            "Consistency",
+            "Clarity",
+            "Capacity"
+          ],
+          "description": "Which of the 3 Cs this bottleneck blocks."
+        },
+        "gated_by_maturity": {
+          "type": "boolean",
+          "description": "True iff stage >= 3 AND maturity_level < 3 (intervention is blocked until foundation reaches Level 3)."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Required for Tools bottlenecks. Must include exactly one of files-default/infrastructure-justified AND exactly one of extend-existing/new-system.",
+          "items": {
+            "enum": [
+              "files-default",
+              "infrastructure-justified",
+              "extend-existing",
+              "new-system"
+            ]
+          }
+        },
+        "file_failure_mode": {
+          "type": "string",
+          "description": "Required when tags includes 'infrastructure-justified'. Cites concurrent writes / aggregation needs / >10K-row scale."
+        },
+        "extends_tool": {
+          "type": "string",
+          "description": "Required when tags includes 'extend-existing'. Names the verified tool from verified-role.md being extended."
+        },
+        "new_system_justification": {
+          "type": "string",
+          "description": "Required when tags includes 'new-system'. One-line justification per Principle 6."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "bottleneck_type": {
+                "const": "tools"
+              }
+            },
+            "required": [
+              "bottleneck_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "tags"
+            ],
+            "properties": {
+              "tags": {
+                "type": "array",
+                "contains": {
+                  "enum": [
+                    "files-default",
+                    "infrastructure-justified"
+                  ]
+                },
+                "allOf": [
+                  {
+                    "contains": {
+                      "enum": [
+                        "extend-existing",
+                        "new-system"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "tags": {
+                "type": "array",
+                "contains": {
+                  "const": "infrastructure-justified"
+                }
+              }
+            },
+            "required": [
+              "tags"
+            ]
+          },
+          "then": {
+            "required": [
+              "file_failure_mode"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "tags": {
+                "type": "array",
+                "contains": {
+                  "const": "extend-existing"
+                }
+              }
+            },
+            "required": [
+              "tags"
+            ]
+          },
+          "then": {
+            "required": [
+              "extends_tool"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "tags": {
+                "type": "array",
+                "contains": {
+                  "const": "new-system"
+                }
+              }
+            },
+            "required": [
+              "tags"
+            ]
+          },
+          "then": {
+            "required": [
+              "new_system_justification"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
