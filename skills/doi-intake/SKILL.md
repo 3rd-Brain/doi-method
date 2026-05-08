@@ -179,7 +179,7 @@ After Section 7:
    > "Here's the picture I have: [3-paragraph summary covering org + goal + constraints + stakeholders]. Anything missing or off?"
 3. If the operator adds or corrects anything, update the relevant `context/` file AND `company-profile.md` before marking intake complete.
 4. Confirm save: "I'll save this as the intake for [org] and hand you back to the consultant for the routing step."
-5. Call `$DOI_SCRIPTS/init-workspace.sh <folder>` if not already done.
+5. Call `$DOI_SCRIPTS/init-workspace.sh <folder>` if not already done. This also scaffolds the live scorecard infrastructure: `data/_index.json`, `scorecard.html`, and `serve.sh` / `serve.cmd`. Tell the operator they can run `bash serve.sh` (or double-click `serve.cmd` on Windows) and open `http://localhost:8765/scorecard.html` to see the engagement scorecard. Sections render "pending" until each phase JSON appears under `data/`; the operator hits browser refresh after each phase to see new content.
 6. Write `.doi-state.md`.
 7. Create or update `$DOI_REGISTRY`.
 
