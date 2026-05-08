@@ -124,11 +124,11 @@ For each entry:
 | `name` | roadmap intervention name, verbatim |
 | `tier` | 1 or 2 (matches roadmap section) |
 | `value_line` | one-line value thesis, ≤ 200 chars, drawn from the roadmap intervention block |
-| `quarter` | Q1 (current calendar quarter) / Q2 / Q3 / Q4. Tier 1 → Q1 or Q2 by sequencing in roadmap. Tier 2 → Q3 or Q4. |
+| `quarter` | Q1 / Q2 / Q3 / Q4. Pulled from the roadmap's sequencing relative to the engagement start. Tier 1 lands in the next 1-2 quarters with available capacity; Tier 2 follows. Real engagements rarely ship Tier 1 in the current quarter, so Q3-Q4 placement is normal when the engagement is mid-year. |
 | `human_effort` | copy from roadmap if present, otherwise omit |
 | `doi_effort` | copy from roadmap if present, otherwise omit |
 
-Quarter assignment rule: pull the sequence from the roadmap. Tier 1 entry #1 = Q1, Tier 1 entries #2+ = Q2. Tier 2 entry #1 = Q3, Tier 2 entries #2+ = Q4. If the roadmap has more than four total Tier 1-2 entries, the overflow stays in Q4.
+Quarter assignment rule: read the roadmap's intervention sequence. Place each Tier 1 entry in the earliest realistic quarter given roadmap-stated dependencies and capacity. Tier 2 follows after the last Tier 1. The fixture (`tests/fixtures/sample-engagement/data/scorecard.json`) shows the expected pattern: Tier 1 → Q3 + Q3, Tier 2 → Q4 for a mid-year engagement. Do not force Q1 / Q2 if the roadmap's sequencing or capacity rules out current-quarter delivery.
 
 Until Phase 6 of the implementation plan adds `human_effort` / `doi_effort` to every Tier 1-2 spec, those fields may be absent in the roadmap. Omit them from the JSON if absent. Do not fabricate effort numbers.
 
