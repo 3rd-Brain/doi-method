@@ -157,6 +157,18 @@ After every critic review, present this gate to the user:
 - **"Stop"** triggers a call to `scripts/doi/update-state.sh` to set `status=stopped`.
 - If the critic returned **NEEDS REVISION**, recommend "Revise" to the user — but do not force it. The user has final say.
 
+### Human Gate Format
+
+When pausing for human approval after this phase, present the gate using this structure (adapted from gstack's review/SKILL.md AskUserQuestion format):
+
+- **D-number**: D-<phase>.<seq>, e.g. D-9.1 for the first decision in Phase 9. Lets the engagement reference past decisions consistently.
+- **ELI10 paragraph**: one short paragraph explaining what's being decided in plain language. No jargon.
+- **Stakes if we pick wrong**: one or two sentences on the cost of the wrong choice. Concrete (lost time, churn, rework) — not abstract ("could cause issues").
+- **Recommendation**: which option you'd pick and one-sentence reason.
+- **Options**: each with ≥2 pros and ≥1 con (≥40 chars each, no fluff). Options must be different in kind, not degree.
+- **Net synthesis**: one sentence summarizing the tradeoff space.
+- **Self-check before emitting**: have you cited specific evidence? Are the options actually different in kind, not degree? Did you load voice.md (no AI vocabulary, no em dashes, no "likely handled")?
+
 ## 7. State Management
 
 State must be updated at two points: after every phase completion and after every human gate decision.
