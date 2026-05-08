@@ -225,6 +225,26 @@ export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
 [ELIGIBLE: proceed to advanced / NOT ELIGIBLE: explain what must improve]
 ```
 
+### JSON output (companion files)
+
+After writing `departments/{dept}/assessments/foundational.md` (and `advanced.md` if the gate passed), also write the corresponding JSON files under `data/`.
+
+**`data/phase-8-pillars-foundational.json`** matches the schema at `scripts/_config/output-schemas/pillars-foundational.json`. Required fields:
+- `department` (string), `generated_at` (date)
+- `pillars` (object) with three required keys: `talent_strategy`, `workflow_optimization`, `digital_architecture`. Each pillar is an object with `score` (integer 0-15), `justification` (string), and `sub_dimensions` (array of 3 sub-dimension ratings, each with `score` 0-5, `justification`, `evidence_cite`)
+- `total_foundational` (integer 0-45) — sum of three pillar scores
+- `advanced_gate_eligible` (boolean) — true iff every foundational pillar score ≥ 8 AND maturity ≥ Level 3 (read from the prior `phase-1-assess.json` if present, else from `assessments/maturity-assessment.md` frontmatter)
+
+**`data/phase-8-pillars-advanced.json`** (only when advanced was actually run) matches `scripts/_config/output-schemas/pillars-advanced.json`. Same shape but with two pillars: `knowledge_management`, `ai_automation`. Plus `gate_check_passed` (boolean — must be `true` for this file to be written).
+
+Then update the engagement index:
+
+```bash
+$DOI_SCRIPTS/update-index.sh "<engagement-folder>" "8_pillars" "complete"
+```
+
+Every sub-dimension `evidence_cite` must point to a real prior-phase file or `_uploads/MANIFEST.md` row. No invented citations.
+
 ### Constraints
 - Every score MUST cite specific evidence — no vibes-based scoring
 - Tool validation is mandatory — if scores and data conflict, trust the data
