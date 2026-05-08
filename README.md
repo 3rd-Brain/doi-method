@@ -227,7 +227,7 @@ Every engagement workspace also creates a `scorecard.html` and a `data/` folder.
     scorecard.json            # written by doi-scorecard (Phase 9 capstone)
 ```
 
-When the engagement is done, run `doi-render` to produce a self-contained `scorecard-handoff.html` (data baked in, no server needed) for client email/Slack.
+When the engagement is done, run `doi-render` to produce a self-contained `scorecard-handoff.html` (data baked in, no server needed) for sharing with stakeholders or board members via email or Slack.
 
 ### 3rd Brain Build Principles
 

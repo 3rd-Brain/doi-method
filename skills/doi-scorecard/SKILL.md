@@ -35,7 +35,7 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 
 ### Overview
 
-> **Voice:** Read `scripts/_config/voice.md` before drafting any client-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+> **Voice:** Read `scripts/_config/voice.md` before drafting any user-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
 
 Engagement capstone. Sits between Phase 9 (doi-roadmap) and Phase 10 (doi-build). Reads everything the engagement has already produced, compresses it into a one-page board-ready artifact, and stops. No new analysis, no new scoring, no new recommendations.
 

@@ -1,6 +1,6 @@
 ---
 name: doi-render
-description: "Use when handing off a finalized DOI scorecard to a client (post-engagement archive, email/Slack share, no-server environments). Reads data/*.json from the engagement folder and bakes it into a single self-contained scorecard-handoff.html where data is inlined and the file works without python -m http.server. Cannot modify scorecard content — only converts the live HTML+JSON pair into a static frozen artifact."
+description: "Use when sharing a finalized DOI scorecard with stakeholders or board (post-engagement archive, email/Slack share, no-server environments). Reads data/*.json from the engagement folder and bakes it into a single self-contained scorecard-handoff.html where data is inlined and the file works without python -m http.server. Cannot modify scorecard content — only converts the live HTML+JSON pair into a static frozen artifact."
 user-invocable: true
 license: GPL-3.0
 metadata:
@@ -13,9 +13,9 @@ metadata:
 
 ### Overview
 
-> **Voice:** Read `scripts/_config/voice.md` before drafting any client-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+> **Voice:** Read `scripts/_config/voice.md` before drafting any user-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
 
-This skill freezes a completed DOI scorecard into a single self-contained HTML file. The live `scorecard.html` produced by `doi-intake` reads `data/scorecard.json` and `data/_index.json` over `fetch()`, which only works under a server (e.g., `python -m http.server`). The handoff version inlines the JSON directly into the HTML so the file opens via `file://` — emailable, Slack-attachable, archivable, no server required.
+This skill freezes a completed DOI scorecard into a single self-contained HTML file. The live `scorecard.html` produced by `doi-intake` reads `data/scorecard.json` and `data/_index.json` over `fetch()`, which only works under a server (e.g., `python -m http.server`). The handoff version inlines the JSON directly into the HTML so the file opens via `file://` — emailable to a board member, Slack-attachable to a stakeholder thread, archivable, no server required.
 
 This is doi-scorecard's sibling, not its successor. doi-scorecard produces the data and the live page; doi-render converts that pair into a frozen artifact for distribution. The visual output is identical — same `render()` function, same data shape, same CSS — only the data load mechanism changes.
 

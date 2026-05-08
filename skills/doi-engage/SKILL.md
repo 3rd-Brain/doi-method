@@ -262,7 +262,7 @@ generated: [date]
 |---|---|---|---|---|
 | 1 | doi-assess | Assesses organizational digital maturity level | Yes | Yes |
 | 2 | doi-setup | Inventories roles, tools, workflows + department outcomes | No | No |
-| 3 | doi-verify | Observes client systems + validates role data | Yes | Yes |
+| 3 | doi-verify | Observes operator systems + validates role data | Yes | Yes |
 | 4 | doi-outcomes | Maps role-level results, success signals, task alignment | Yes | Yes |
 | 5 | doi-roles | Researches tool APIs, classifies tasks (outcome-aware) | Yes | Yes |
 | 6 | doi-friction | Scores friction via Three C's (outcome context) | Yes | Yes |

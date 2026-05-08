@@ -1,6 +1,6 @@
 # DOI Voice Rules
 
-Skills that write client-facing or critic-facing output read this file before drafting.
+Skills that write user-facing or critic-facing output read this file before drafting. The "user" here is the operator running DOI on their own organization — DOI's audience is the operator and their stakeholders/board, not a separate client.
 
 ## Verification rule
 

@@ -35,7 +35,7 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 
 ### Overview
 
-> **Voice:** Read `scripts/_config/voice.md` before drafting any client-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+> **Voice:** Read `scripts/_config/voice.md` before drafting any user-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
 
 Phase 7 of the DOI Method. Diagnostician — classifies what's causing friction and routes to the right intervention type. This is where DOI's People → Process → Tools philosophy meets SONAR-style bottleneck analysis.
 
