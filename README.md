@@ -214,9 +214,9 @@ Drop files in before, during, or between sessions. The relevant phases scan and 
 
 `MANIFEST.md` is the provenance trail. The critic uses it to verify no invented data.
 
-### Live scorecard during the engagement
+### Scorecard — view after Phase 9
 
-Every engagement workspace also creates a `scorecard.html` and a `data/` folder. Run `bash serve.sh` (or double-click `serve.cmd` on Windows) and open `localhost:8765/scorecard.html` — sections render "pending" until each phase JSON drops into `data/`. Hit refresh after each phase to see new content.
+The scorecard is a capstone, not a live dashboard. Every engagement workspace gets a `scorecard.html` and a `data/` folder scaffolded at intake, but the scorecard stays "pending" until `doi-scorecard` runs after Phase 9 (the roadmap phase). After that, run `bash serve.sh` (or double-click `serve.cmd` on Windows) and open `localhost:8765/scorecard.html` to see it.
 
 ```text
 <engagement>/
@@ -224,10 +224,10 @@ Every engagement workspace also creates a `scorecard.html` and a `data/` folder.
   serve.sh / serve.cmd        # python -m http.server convenience
   data/
     _index.json               # phase status registry
-    scorecard.json            # written by doi-scorecard (Phase 9 capstone)
+    scorecard.json            # written by doi-scorecard (after Phase 9)
 ```
 
-When the engagement is done, run `doi-render` to produce a self-contained `scorecard-handoff.html` (data baked in, no server needed) for sharing with stakeholders or board members via email or Slack.
+For sharing with stakeholders or board members, run `doi-render` to produce a self-contained `scorecard-handoff.html` (data baked in, no server needed). Email or Slack-attach the file directly.
 
 ### 3rd Brain Build Principles
 
