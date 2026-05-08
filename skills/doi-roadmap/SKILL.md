@@ -291,7 +291,11 @@ Tier 1 entries additionally require: `shippable_subset_1_week`, `demo_definition
 
 Tier 2 entries additionally require: `principle_compliance` (same shape as Tier 1).
 
-Tier 1 and Tier 2 entries should also include `human_effort` (string) and `doi_effort` (string) when present in the roadmap. These become required for Tier 1-2 in Phase 6 of the implementation plan; until then, omit the field if absent rather than fabricating values.
+**Effort labels (Tier 1 and Tier 2 only):** every Tier 1 and Tier 2 intervention MUST include both:
+- `human_effort:` time a human consultant alone would need (e.g., "2 weeks of consultant + AE time")
+- `doi_effort:` time using the DOI pipeline (e.g., "1 day to scaffold + 1 week demo")
+
+These appear on the scorecard as the "Effort (human / DOI)" column. They make the AI compression visible at decision time. Source: gstack ETHOS.md "Effort both-scales" framing — adapted for consulting (human consultant vs. DOI pipeline) instead of (human team vs. CC+gstack).
 
 Then update the engagement index:
 

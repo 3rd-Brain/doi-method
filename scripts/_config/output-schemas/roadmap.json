@@ -263,7 +263,9 @@
             "state_owner",
             "feedback_signal",
             "deletion_impact",
-            "principle_compliance"
+            "principle_compliance",
+            "human_effort",
+            "doi_effort"
           ],
           "properties": {
             "shippable_subset_1_week": {
@@ -288,6 +290,14 @@
             },
             "principle_compliance": {
               "$ref": "#/$defs/principle_compliance"
+            },
+            "human_effort": {
+              "type": "string",
+              "description": "Required for Tier 1: time a human consultant alone would need (e.g., '2 weeks of consultant + AE time')."
+            },
+            "doi_effort": {
+              "type": "string",
+              "description": "Required for Tier 1: time using the DOI pipeline (e.g., '1 day to scaffold + 1 week demo')."
             }
           }
         }
@@ -301,11 +311,21 @@
         {
           "type": "object",
           "required": [
-            "principle_compliance"
+            "principle_compliance",
+            "human_effort",
+            "doi_effort"
           ],
           "properties": {
             "principle_compliance": {
               "$ref": "#/$defs/principle_compliance"
+            },
+            "human_effort": {
+              "type": "string",
+              "description": "Required for Tier 2: time a human consultant alone would need (e.g., '2 weeks of consultant + AE time')."
+            },
+            "doi_effort": {
+              "type": "string",
+              "description": "Required for Tier 2: time using the DOI pipeline (e.g., '1 day to scaffold + 1 week demo')."
             }
           }
         }
