@@ -222,6 +222,7 @@ build/
 ├── {intervention-slug}/
 │   ├── BUILD-NOTES.md                 # Architect questions, principle compliance
 │   ├── SHIP-CHECKLIST.md              # 1-week demo steps
+│   ├── playbook.md                    # Operator-handoff runbook (rendered from scripts/_templates/playbook.md)
 │   ├── DEMO-FEEDBACK.md               # (added after operator demos)
 │   └── [template-specific files]      # SKILL.md, CONTEXT.md, _config/, output/, .json configs, .py scripts, etc.
 ├── {next-intervention-slug}/
@@ -229,6 +230,14 @@ build/
 ```
 
 `build/` is parallel to `output/`. `output/` is analysis (documents). `build/` is deliverables (working artifacts).
+
+### Playbook output (per intervention)
+
+For every Tools+Stage 1, Tools+Stage 2, Process bottleneck, and Tools+Stage 3 (single-agent default) intervention, also produce `build/{intervention-slug}/playbook.md` using the template at `scripts/_templates/playbook.md`. The playbook is the operator-handoff runbook — actionable enough that Claude Code, Zapier, or a junior operator can execute without supervision.
+
+Fill every `{{placeholder}}` token. Leaving placeholders unfilled is a Principle 7 violation: deliveries should be operator-ready, not skeleton-shaped. The Decommission section's three architect questions (state owner, feedback signal, deletion impact) must answer concretely — not "see BUILD-NOTES" or "TBD".
+
+For Tools+Stage 4 interventions: refused by default. If override is granted (with measured Stage 3 success cited per Principle 4), the playbook MUST cite that override in the Background Context.
 
 ## 5. Constraints
 

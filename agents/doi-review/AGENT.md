@@ -165,6 +165,9 @@ Review `build/{intervention-slug}/` against the original roadmap intervention sp
 11. **No invented data.** Every API endpoint, integration name, vendor feature, field name in the artifact must trace to `integration-research.md`, `_uploads/MANIFEST.md`, or a web-search citation in the build notes. Untraceable claims = CRITICAL (invented data).
 12. Does the artifact write only inside `build/{intervention-slug}/`? Files written elsewhere = CRITICAL (scope violation).
 13. Is the result the artifact serves identified? (R# from outcome-map.md, or "operational efficiency only" with rationale)
+14. Does `build/{intervention-slug}/playbook.md` exist for Tools+Stage 1/2, Tools+Stage 3 single-agent, and Process interventions? Missing = CRITICAL.
+15. Are all `{{placeholder}}` tokens replaced in the playbook? Unfilled placeholders = CRITICAL.
+16. Does the playbook's Decommission section answer all three architect questions concretely (not "TBD" or "see BUILD-NOTES")? Vague answers = CRITICAL.
 
 ## 4. Review Output Format
 
