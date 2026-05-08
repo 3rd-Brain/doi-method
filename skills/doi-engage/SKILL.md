@@ -157,6 +157,10 @@ After every critic review, present this gate to the user:
 - **"Stop"** triggers a call to `scripts/doi/update-state.sh` to set `status=stopped`.
 - If the critic returned **NEEDS REVISION**, recommend "Revise" to the user — but do not force it. The user has final say.
 
+### Routing decisions
+
+The routing step (full pipeline / single role / score only / pillars only) is a genuine multi-option decision — DOI does not know which path the operator wants. Present this using the decision-brief format in `scripts/_config/decision-brief.md`. All other gates between phases are review-and-continue moments, not decisions; deliver the finding and ask the operator to continue, add context, or pause.
+
 ## 7. State Management
 
 State must be updated at two points: after every phase completion and after every human gate decision.
@@ -258,7 +262,7 @@ generated: [date]
 |---|---|---|---|---|
 | 1 | doi-assess | Assesses organizational digital maturity level | Yes | Yes |
 | 2 | doi-setup | Inventories roles, tools, workflows + department outcomes | No | No |
-| 3 | doi-verify | Observes client systems + validates role data | Yes | Yes |
+| 3 | doi-verify | Observes operator systems + validates role data | Yes | Yes |
 | 4 | doi-outcomes | Maps role-level results, success signals, task alignment | Yes | Yes |
 | 5 | doi-roles | Researches tool APIs, classifies tasks (outcome-aware) | Yes | Yes |
 | 6 | doi-friction | Scores friction via Three C's (outcome context) | Yes | Yes |

@@ -54,6 +54,40 @@ traceable to either the operator's words or a manifest row, that is a methodolog
 EOF
 fi
 
+# Scorecard infrastructure — live one-page rendering during the engagement.
+# Operators serve the engagement folder via `bash serve.sh` or double-click `serve.cmd`,
+# then open http://localhost:8765/scorecard.html. Sections render "pending" until each
+# phase JSON appears in data/. Refresh the browser to see updates.
+mkdir -p "$ENGAGEMENT_DIR/data"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TEMPLATE_SRC="$SCRIPT_DIR/_templates/scorecard.html"
+if [ -f "$TEMPLATE_SRC" ] && [ ! -f "$ENGAGEMENT_DIR/scorecard.html" ]; then
+    cp "$TEMPLATE_SRC" "$ENGAGEMENT_DIR/scorecard.html"
+fi
+
+INDEX_SCRIPT="$SCRIPT_DIR/update-index.sh"
+if [ -x "$INDEX_SCRIPT" ] && [ ! -f "$ENGAGEMENT_DIR/data/_index.json" ]; then
+    "$INDEX_SCRIPT" "$ENGAGEMENT_DIR" "0_intake" "in_progress"
+fi
+
+if [ ! -f "$ENGAGEMENT_DIR/serve.sh" ]; then
+    cat > "$ENGAGEMENT_DIR/serve.sh" <<'SERVE_EOF'
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+python3 -m http.server 8765
+SERVE_EOF
+    chmod +x "$ENGAGEMENT_DIR/serve.sh"
+fi
+
+if [ ! -f "$ENGAGEMENT_DIR/serve.cmd" ]; then
+    cat > "$ENGAGEMENT_DIR/serve.cmd" <<'SERVE_EOF'
+@echo off
+cd /d "%~dp0"
+python -m http.server 8765
+SERVE_EOF
+fi
+
 # If department specified, create department structure
 if [ -n "$DEPT_SLUG" ]; then
     DEPT_DIR="$ENGAGEMENT_DIR/departments/$DEPT_SLUG"

@@ -224,6 +224,6 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 - Do NOT dump all 30 questions at once — go category by category
 - Do NOT recommend solutions in this phase
 - Do NOT skip hard cap logic — the script handles it, trust its output
-- Plain language throughout — this is client-facing, not a consultant report
+- Plain language throughout — this is user-facing, not a consultant report
 - If the user is uncertain about a question, help them think through it but don't answer for them
 - The "What This Means" section must reference the primary goal from company-profile.md

@@ -35,9 +35,11 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 
 ### Overview
 
+> **Voice:** Read `scripts/_config/voice.md` before drafting any user-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+
 Phase 5 of the DOI Method. Analyst — extracts tasks from verified role profiles, classifies automation potential, and decomposes into implementable units. This is the technical core of DOI.
 
-Before classifying tasks or decomposing microservices, this phase researches the client's actual software capabilities — API docs, integration catalogs, automation features — so that workflow steps and microservice designs reference real, verified capabilities rather than assumptions.
+Before classifying tasks or decomposing microservices, this phase researches the operator's actual software capabilities — API docs, integration catalogs, automation features — so that workflow steps and microservice designs reference real, verified capabilities rather than assumptions.
 
 ### Role Constraints
 
@@ -118,7 +120,7 @@ Military decision-making cycle applied to task scoping:
 ### Process
 
 1. Read `verified-role.md` AND `outcome-map.md` for the current role
-2. **Tool/API Research** — before classifying anything, research the client's actual software stack. See the Tool/API Research section below for full details. Save findings to `roles/{role-slug}/integration-research.md`.
+2. **Tool/API Research** — before classifying anything, research the operator's actual software stack. See the Tool/API Research section below for full details. Save findings to `roles/{role-slug}/integration-research.md`.
 3. **Task Extraction** — extract every distinct task into frequency categories:
    - Quarterly (3-month recurring)
    - Monthly (1-month recurring)
@@ -154,13 +156,13 @@ Military decision-making cycle applied to task scoping:
 
 Read `department.md` for the tools list and `verified-role.md` for the verified tools table. For EACH tool the role actually uses:
 
-**Check `_uploads/tool-exports/` first.** Before web search, scan for client-provided artifacts:
+**Check `_uploads/tool-exports/` first.** Before web search, scan for operator-provided artifacts:
 
 ```bash
 $DOI_SCRIPTS/scan-uploads.sh <engagement-folder> tool-exports
 ```
 
-Operator-provided exports (Zapier scenario JSON, Make blueprints, n8n workflow exports, CRM field schemas, integration screenshots, API doc PDFs, vendor SOW excerpts) are higher-trust than web search because they reflect the **client's actual instance and configuration** — not the vendor's marketing surface. Mine these first; web search supplements the gaps. For each file ingested, append a row to `_uploads/MANIFEST.md`:
+Operator-provided exports (Zapier scenario JSON, Make blueprints, n8n workflow exports, CRM field schemas, integration screenshots, API doc PDFs, vendor SOW excerpts) are higher-trust than web search because they reflect the **operator's actual instance and configuration** — not the vendor's marketing surface. Mine these first; web search supplements the gaps. For each file ingested, append a row to `_uploads/MANIFEST.md`:
 
 `| _uploads/tool-exports/<file> | 5 | doi-roles | integration-research.md (<tool>) | YYYY-MM-DD |`
 

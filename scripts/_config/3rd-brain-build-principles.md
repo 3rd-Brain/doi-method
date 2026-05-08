@@ -4,7 +4,7 @@ This is the canonical, immutable doctrine the DOI consultant applies when scopin
 
 Phase skills that reference this file: `doi-roles` (Phase 5), `doi-route` (Phase 7), `doi-roadmap` (Phase 9), `doi-build` (Phase 10). The `doi-review` critic enforces compliance at the corresponding gates.
 
-**This file is bundled with the plugin and is not editable per-engagement.** If a client's situation genuinely violates a principle, the violation is documented in the roadmap with an explicit rationale, but the principle is not rewritten.
+**This file is bundled with the plugin and is not editable per-engagement.** If an engagement's situation genuinely violates a principle, the violation is documented in the roadmap with an explicit rationale, but the principle is not rewritten.
 
 ---
 

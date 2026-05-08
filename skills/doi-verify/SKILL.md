@@ -38,12 +38,12 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 Phase 3 of the DOI Method. Investigator — probes the gap between what materials say a role does and what the person actually does day-to-day. This is what separates DOI from blind self-assessment. People describe their roles aspirationally, not operationally. A marketing manager says "I develop campaign strategy" when they actually spend 3 hours a day copy-pasting data between spreadsheets.
 
 This phase uses TWO verification methods:
-1. **Direct System Observation** — connect to the client's actual tools (Slack, CRM, PM tools, email, calendars) to observe real usage patterns, data structures, and workflows before asking questions
-2. **Conversational Probing** — ask the user targeted questions to fill gaps the systems can't reveal (motivations, frustrations, workarounds, tribal knowledge)
+1. **Direct System Observation** — connect to the operator's actual tools (Slack, CRM, PM tools, email, calendars) to observe real usage patterns, data structures, and workflows before asking questions
+2. **Conversational Probing** — ask the operator targeted questions to fill gaps the systems can't reveal (motivations, frustrations, workarounds, tribal knowledge)
 
 ### Role Constraints
 
-- CAN: Connect to client systems, observe real usage data, ask probing questions, document discrepancies, capture time estimates, identify undocumented work
+- CAN: Connect to operator systems, observe real usage data, ask probing questions, document discrepancies, capture time estimates, identify undocumented work
 - CANNOT: Classify tasks by automation stage, score friction, recommend solutions, suggest tools
 
 ### Session Resolution

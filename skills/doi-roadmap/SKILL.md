@@ -34,6 +34,9 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 ```
 
 ### Overview
+
+> **Voice:** Read `scripts/_config/voice.md` before drafting any user-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+
 Phase 9 of the DOI Method. Planner — the final deliverable. Synthesizes everything from prior phases into an actionable, sequenced implementation roadmap. Prioritizes interventions, sorts into tiers, sequences within tiers, and projects impact.
 
 ### Role Constraints
@@ -269,6 +272,14 @@ Within each tier, follow this order:
 - Do NOT [specific action] — [why: foundation not ready / dependency not met / will waste resources]
 - Do NOT [next item]
 ```
+
+### Effort labels (Tier 1 and Tier 2 required)
+
+Every Tier 1 and Tier 2 intervention MUST include both:
+- **Human consultant effort:** time a hired consultant alone would need (e.g., "2 weeks of consultant + AE time")
+- **DOI effort:** time using DOI (e.g., "1 day to scaffold + 1 week demo")
+
+These appear on the scorecard as the "Effort (human / DOI)" column. They make the AI compression visible at decision time so the operator can defend the budget ask to their stakeholders.
 
 ### Constraints
 - Every intervention MUST trace back to bottleneck analysis + friction data

@@ -1,6 +1,6 @@
 ---
 name: doi-build
-description: "Use when constructing client-ready artifacts (Claude Skills/Agents, ICM folder structures, integration configs, SOPs) from an approved DOI roadmap. Phase 10 of the DOI Method. Reads the roadmap, picks Tier 1 interventions by default, dispatches doi-builder subagents per intervention, runs critic review on artifacts, gates per-intervention so the operator can ship and test before building the next one. Cannot invent interventions, change roadmap priorities, or build ungated Stage 3-4 work."
+description: "Use when constructing operator-ready artifacts (Claude Skills/Agents, ICM folder structures, integration configs, SOPs) from an approved DOI roadmap. Phase 10 of the DOI Method. Reads the roadmap, picks Tier 1 interventions by default, dispatches doi-builder subagents per intervention, runs critic review on artifacts, gates per-intervention so the operator can ship and test before building the next one. Cannot invent interventions, change roadmap priorities, or build ungated Stage 3-4 work."
 user-invocable: true
 license: GPL-3.0
 metadata:
@@ -37,7 +37,9 @@ mkdir -p "$(dirname "$DOI_REGISTRY")"
 
 ## 1. Overview
 
-Phase 10 of the DOI Method — the first phase that **produces working artifacts** for the client, not analysis documents. doi-build reads the approved `roadmap.md`, walks the operator through which interventions to build (default: Tier 1 only), dispatches a `doi-builder` subagent per intervention, runs critic review on each artifact, and gates per-intervention so the operator can actually ship and test before the next one is built.
+> **Voice:** Read `scripts/_config/voice.md` before drafting any user-facing output. Verification rule, vocabulary blocklist, Confusion Protocol all apply.
+
+Phase 10 of the DOI Method — the first phase that **produces working artifacts** for the operator's organization, not analysis documents. doi-build reads the approved `roadmap.md`, walks the operator through which interventions to build (default: Tier 1 only), dispatches a `doi-builder` subagent per intervention, runs critic review on each artifact, and gates per-intervention so the operator can actually ship and test before the next one is built.
 
 **This is the phase that makes Principle 3 — Ship every week — real.** Each artifact is built to the **1-week shippable subset** declared in the roadmap, not the eventual full design. The operator demos it, uses it, learns from it, and only then does the next artifact get built.
 
@@ -220,6 +222,7 @@ build/
 ├── {intervention-slug}/
 │   ├── BUILD-NOTES.md                 # Architect questions, principle compliance
 │   ├── SHIP-CHECKLIST.md              # 1-week demo steps
+│   ├── playbook.md                    # Operator-handoff runbook (rendered from scripts/_templates/playbook.md)
 │   ├── DEMO-FEEDBACK.md               # (added after operator demos)
 │   └── [template-specific files]      # SKILL.md, CONTEXT.md, _config/, output/, .json configs, .py scripts, etc.
 ├── {next-intervention-slug}/
@@ -227,6 +230,18 @@ build/
 ```
 
 `build/` is parallel to `output/`. `output/` is analysis (documents). `build/` is deliverables (working artifacts).
+
+### Playbook output (per intervention)
+
+For every Tools+Stage 1, Tools+Stage 2, Process bottleneck, and Tools+Stage 3 (single-agent default) intervention, also produce `build/{intervention-slug}/playbook.md` using the template at `scripts/_templates/playbook.md`. The playbook is the operator-handoff runbook — actionable enough that Claude Code, Zapier, or a junior operator can execute without supervision.
+
+Fill every `{{placeholder}}` token. Leaving placeholders unfilled is a Principle 7 violation: deliveries should be operator-ready, not skeleton-shaped. The Decommission section's three architect questions (state owner, feedback signal, deletion impact) must answer concretely — not "see BUILD-NOTES" or "TBD".
+
+For Tools+Stage 4 interventions: refused by default. If override is granted (with measured Stage 3 success cited per Principle 4), the playbook MUST cite that override in the Background Context.
+
+### Order-swap decisions
+
+When the operator wants to swap build order (build a different Tier 1 next, pivot to a Tier 2, etc.), DOI is genuinely ambivalent — the roadmap doesn't pick for the operator. Present these moments using the decision-brief format in `scripts/_config/decision-brief.md`. Phase-end review gates (after each artifact ships) are NOT decisions — those are "here's what was built, demo it and tell me what to build next."
 
 ## 5. Constraints
 

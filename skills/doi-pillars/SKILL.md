@@ -240,4 +240,4 @@ export DOI_REGISTRY="$HOME/.claude/.doi-registry.md"
 | Scoring without evidence | "Role snapshots show X" not "the team seems Y" |
 | Ignoring tool validation | Compare bottleneck findings against tool scores |
 | Running advanced when gate fails | Check level AND all pillar totals first |
-| Soft-scoring to please the client | Score based on data. Explain diplomatically. |
+| Soft-scoring to please a stakeholder | Score based on data. Explain diplomatically. |
