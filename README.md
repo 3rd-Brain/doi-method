@@ -33,7 +33,9 @@ If you uploaded DOI as a plugin and saw `Unknown command: /doi-run`, nothing was
 | **Friction Tax** | % of capacity lost to friction by task, role, and department |
 | **Bottleneck Routing** | People / Process / Tools diagnosis for high-friction work |
 | **Pillar Assessment** | Evidence-backed foundational + advanced readiness scores |
-| **Implementation Roadmap** | Tiered, sequenced plan with projected friction reduction |
+| **Implementation Roadmap** | Tiered, sequenced plan with projected friction reduction, dual-effort labels (human consultant vs. DOI pipeline) |
+| **Engagement Scorecard** | One-page board-ready HTML — verdict, 5 readiness ratings (1–5), deployable Tier 1–2 list with quarterly assignments, remediation roadmap. Renders live in the browser as phases complete; can be re-baked into a self-contained handoff file. |
+| **Per-Intervention Playbook** | Operator-handoff runbook produced per Phase 10 artifact: trigger, inputs, step-by-step instructions with success criteria, decommission section answering the three architect questions |
 | **Working Artifacts** *(opt-in)* | Phase 10 produces shippable Skills, ICM folders, integration configs, SOPs — built one per week against the 3rd Brain Build Principles |
 
 This is not a report someone reads and shelves. Every output feeds the next phase. And Phase 10 turns the roadmap into things you can actually use.
@@ -211,6 +213,24 @@ Drop files in before, during, or between sessions. The relevant phases scan and 
 - `doi-roles` reads `_uploads/tool-exports/` before web search — operator-provided exports beat vendor marketing.
 
 `MANIFEST.md` is the provenance trail. The critic uses it to verify no invented data.
+
+### Live scorecard during the engagement
+
+Every engagement workspace also creates a `scorecard.html` and a `data/` folder. Run `bash serve.sh` (or double-click `serve.cmd` on Windows) and open `localhost:8765/scorecard.html` — sections render "pending" until each phase JSON drops into `data/`. Hit refresh after each phase to see new content.
+
+```text
+<engagement>/
+  scorecard.html              # Pre-built one-pager; reads ./data/*.json via fetch
+  serve.sh / serve.cmd        # python -m http.server convenience
+  data/
+    _index.json               # phase status registry
+    phase-1-assess.json       # written by doi-assess
+    phase-8-pillars-foundational.json
+    phase-9-roadmap.json
+    scorecard.json            # written by doi-scorecard (Phase 9 capstone)
+```
+
+When the engagement is done, run `doi-render` to produce a self-contained `scorecard-handoff.html` (data baked in, no server needed) for client email/Slack.
 
 ### 3rd Brain Build Principles
 
