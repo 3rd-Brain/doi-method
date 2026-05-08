@@ -225,18 +225,6 @@ Stage 1-2 interventions can begin immediately. These build the Consistency and C
 Foundation supports all intervention stages. Consistency and Clarity are established — Stage 3-4 work can proceed toward Capacity gains.
 ```
 
-### Human Gate Format
-
-When pausing for human approval after this phase, present the gate using this structure (adapted from gstack's review/SKILL.md AskUserQuestion format):
-
-- **D-number**: D-<phase>.<seq>, e.g. D-9.1 for the first decision in Phase 9. Lets the engagement reference past decisions consistently.
-- **ELI10 paragraph**: one short paragraph explaining what's being decided in plain language. No jargon.
-- **Stakes if we pick wrong**: one or two sentences on the cost of the wrong choice. Concrete (lost time, churn, rework) — not abstract ("could cause issues").
-- **Recommendation**: which option you'd pick and one-sentence reason.
-- **Options**: each with ≥2 pros and ≥1 con (≥40 chars each, no fluff). Options must be different in kind, not degree.
-- **Net synthesis**: one sentence summarizing the tradeoff space.
-- **Self-check before emitting**: have you cited specific evidence? Are the options actually different in kind, not degree? Did you load voice.md (no AI vocabulary, no em dashes, no "likely handled")?
-
 ### Constraints
 - Classify bottlenecks based on friction data AND verification findings — not assumptions
 - A task can have multiple bottleneck types — list ALL that apply, primary first

@@ -239,17 +239,9 @@ Fill every `{{placeholder}}` token. Leaving placeholders unfilled is a Principle
 
 For Tools+Stage 4 interventions: refused by default. If override is granted (with measured Stage 3 success cited per Principle 4), the playbook MUST cite that override in the Background Context.
 
-### Human Gate Format
+### Order-swap decisions
 
-When pausing for human approval after this phase, present the gate using this structure (adapted from gstack's review/SKILL.md AskUserQuestion format):
-
-- **D-number**: D-<phase>.<seq>, e.g. D-9.1 for the first decision in Phase 9. Lets the engagement reference past decisions consistently.
-- **ELI10 paragraph**: one short paragraph explaining what's being decided in plain language. No jargon.
-- **Stakes if we pick wrong**: one or two sentences on the cost of the wrong choice. Concrete (lost time, churn, rework) — not abstract ("could cause issues").
-- **Recommendation**: which option you'd pick and one-sentence reason.
-- **Options**: each with ≥2 pros and ≥1 con (≥40 chars each, no fluff). Options must be different in kind, not degree.
-- **Net synthesis**: one sentence summarizing the tradeoff space.
-- **Self-check before emitting**: have you cited specific evidence? Are the options actually different in kind, not degree? Did you load voice.md (no AI vocabulary, no em dashes, no "likely handled")?
+When the operator wants to swap build order (build a different Tier 1 next, pivot to a Tier 2, etc.), DOI is genuinely ambivalent — the roadmap doesn't pick for the operator. Present these moments using the decision-brief format in `scripts/_config/decision-brief.md`. Phase-end review gates (after each artifact ships) are NOT decisions — those are "here's what was built, demo it and tell me what to build next."
 
 ## 5. Constraints
 
