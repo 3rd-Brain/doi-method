@@ -329,7 +329,7 @@ Full install details live in [INSTALL.md](INSTALL.md).
 
 **Claude Code plugin:** `/plugin uninstall doi-method@doi-method`
 
-**Claude Code standalone:** `rm -rf ~/.claude/skills/doi-* ~/.claude/agents/doi-review ~/.claude/scripts/doi/`
+**Claude Code standalone:** `rm -rf ~/.claude/skills/doi-* ~/.claude/agents/doi-review ~/.claude/agents/doi-builder ~/.claude/scripts/doi/`
 
 **Cowork plugin:** remove DOI from Customize -> Plugins
 
